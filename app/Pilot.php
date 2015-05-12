@@ -13,7 +13,7 @@ class Pilot extends Model {
 
 	private $email;
 
-	public flight(){
+	public function flight(){
 		return $this->hasOne('Flight');
 	}
 

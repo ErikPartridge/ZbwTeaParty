@@ -15,9 +15,9 @@ Route::get('/', 'WelcomeController@index');
 
 Route::post('/', 'WelcomeController@feedback');
 
-Route::get('home', 'WelcomeController@index');
-
 Route::get('/poker', 'WelcomeController@poker');
+
+Route::get('/home', 'HomeController@index');
 
 Route::get('/booking', 'FlightController@index');
 

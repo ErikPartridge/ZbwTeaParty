@@ -39,7 +39,7 @@
   		</nav>
   		</div>
       <div class="container">
-        <h3>Bookings FAQ:</h3>
+        <h3>Bookings FAQ</h3>
         <p></p>
         <h3>Bookings</h3>
       </div>
