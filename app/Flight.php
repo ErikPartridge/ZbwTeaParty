@@ -17,6 +17,8 @@ class Flight extends Model {
 
 	private $aircraft_type;
 
+	private $route;
+
 	private $booked;
 
 
