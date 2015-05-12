@@ -13,7 +13,7 @@ class MakeRelationshipNullable extends Migration {
 	public function up()
 	{
 		Schema::table('flights', function($table){
-			$table->string('pilot_id')->nullable()->change();
+			$table->integer('pilot_id')->unsigned()->nullable()->change();
 		});
 	}
 
