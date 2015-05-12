@@ -40,18 +40,18 @@
   		</div>
       <div class="container">
         <h3>Bookings FAQ</h3>
-        <p><b>Q:</b>Do I have to have a booking?</p>
-        <p><b>A:</b>No, only if you want to qualify for airport poker do you need to have a booking.</p>
-        <p><b>Q:</b>Can I make multiple bookings?</p>
-        <p><b>A:</b>Of course, make as many bookings as you can fly!</p>
-        <p><b>Q:</b>Do I have to fly at that time?</p>
-        <p><b>A:</b>While not required, we ask that you try to depart within +/- 30 minutes of the scheduled departure time so we can plan for the traffic. If you are departing KBOS we recommend you sign on 25-35 minutes prior in case of delays.</p>
-        <p><b>Q:</b>What is a booking?</p>
-        <p><b>A:</b>A reserved flight. However, this does not reserve the callsign for you on VATSIM. Provided in the booking is a suggested departure time, route and cruise altitude to make your flight planning all the more simple.</p>
-        <p><b>Q:</b>Who can make a booking?</p>
-        <p><b>A:</b>Any VATSIM pilot or controller who is not a home member of the Boston ARTCC.</p>
-        <p><b>Q:</b>When can I make a booking?</p>
-        <p><b>A</b>Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
+        <p><b>Q:</b>&nbsp;Do I have to have a booking?</p>
+        <p><b>A:</b>&nbsp;No, only if you want to qualify for airport poker do you need to have a booking.</p>
+        <p><b>Q:</b>&nbsp;Can I make multiple bookings?</p>
+        <p><b>A:</b>&nbsp;Of course, make as many bookings as you can fly!</p>
+        <p><b>Q:</b>&nbsp;Do I have to fly at that time?</p>
+        <p><b>A:</b>&nbsp;While not required, we ask that you try to depart within +/- 30 minutes of the scheduled departure time so we can plan for the traffic. If you are departing KBOS we recommend you sign on 25-35 minutes prior in case of delays.</p>
+        <p><b>Q:</b>&nbsp;What is a booking?</p>
+        <p><b>A:</b>&nbsp;A reserved flight. However, this does not reserve the callsign for you on VATSIM. Provided in the booking is a suggested departure time, route and cruise altitude to make your flight planning all the more simple.</p>
+        <p><b>Q:</b>&nbsp;Who can make a booking?</p>
+        <p><b>A:</b>&nbsp;Any VATSIM pilot or controller who is not a home member of the Boston ARTCC.</p>
+        <p><b>Q:</b>&nbsp;When can I make a booking?</p>
+        <p><b>A</b>&nbsp;Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
         <h3>Bookings</h3>
       </div>
 	</body>
