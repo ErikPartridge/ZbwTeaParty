@@ -13,6 +13,8 @@ class Flight extends Model {
 
 	private $arrives;
 
+	private $altitude;
+
 	private $departs;
 
 	private $aircraft_type;
