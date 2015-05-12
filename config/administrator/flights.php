@@ -31,9 +31,6 @@ return array(
 		'arrives'   => array(
 			'title' => 'Arrival Airport'
 		),
-		'aircraft_type' => array(
-			'title' => 'Aircraft Type'
-		),
 		'booked'    => array(
 			'title' => 'Is Booked',
 			'display' => function($value){
@@ -91,6 +88,10 @@ return array(
 		),
 		'route' => array(
 			'title' => 'Route',
+			'type'  => 'text'
+		),
+		'altitude' => array(
+			'title' => 'Altitude',
 			'type'  => 'text'
 		),
 		'poker'   => array(

@@ -101,6 +101,10 @@
   				<p><b>A:</b>&nbsp;If you want to. If you're part of a group flight (5 people or more), please drop our <a href="mailto:ec@bostonartcc.net">events coordinator an email</a> so he can best plan.</p>
   				<p><b>Q:</b>&nbsp;I don't have a working microphone, what should I do?</p>
   				<p><b>A:</b>&nbsp;Try to operate in at least voice receive mode, and file as such by putting /r/ in your remarks.</p>
+          <p><b>Q:</b>&nbsp;What should I do when a controller says to descend via?</p>
+          <p><b>A:</b>&nbsp;Meet all the published altitude, speed, and heading restrictions on the STAR you are on. Also, a runway transition will be issued, enter that runway into your FMC and meet the restrictions for that transition. For example, on the ROBUC1 STAR into Boston, you should cross GIGTY at or above FL210 and at or below FL230 when given the descend via.</p>
+          <p><b>Q:</b>&nbsp;What is a PDC and how do I use it?</p>
+          <p><b>A:</b>&nbsp;A pre-departure clearance is an IFR clearance via private message and contains all the information contained in a regular voice clearance. However, when calling for taxi be sure to call in with the current ATIS code, your squawk code, and your standard instrument departure.</p>
   			</div>
   			<!-- END FAQ -->
   			<hr>
