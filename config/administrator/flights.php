@@ -89,6 +89,10 @@ return array(
 			'title' => 'Aircraft Type',
 			'type'  => 'text'
 		),
+		'route' => array(
+			'title' => 'Route',
+			'type'  => 'text'
+		),
 		'poker'   => array(
 			'title'  => 'Qualifies for Poker',
 			'type'  => 'bool'
