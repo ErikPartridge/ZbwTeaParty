@@ -16,9 +16,9 @@ class AddRouteToFlights extends Migration {
 			$table->string('route');
 			$table->timestamps();
 		});
-		Schema::table('pilots', function(Blueprint $table)){
+		Schema::table('pilots', function(Blueprint $table){
 			$table->timestamps();
-		}
+		});
 	}
 
 	/**
