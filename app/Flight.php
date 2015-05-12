@@ -25,6 +25,10 @@ class Flight extends Model {
 
 
 	public function user(){
-		return $this->belongsTo('Pilot');
+		if($this->pilot_id != null){
+			return $this->belongsTo('Pilot');
+		}else{
+			return null;
+		}
 	}
 }
