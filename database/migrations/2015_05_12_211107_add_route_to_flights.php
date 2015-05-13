@@ -28,7 +28,9 @@ class AddRouteToFlights extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::table('flights', function($table){
+			$table->dropColumn('route');
+		});
 	}
 
 }

@@ -24,7 +24,9 @@ class AddAltitudeFlights extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::table('flights', function($table){
+			$table->dropColumn('altitude');
+		});
 	}
 
 }
