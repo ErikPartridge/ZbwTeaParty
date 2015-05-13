@@ -63,7 +63,7 @@
           <tr><td>{{substr($flight->departure, 0, 5)}}z</td><td>{{substr($flight->arrival, 0, 5)}}z</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td>@if($flight->booked)
           <td class="booked">Booked</td>
           @else
-          <td class="not-booked"><a href="/bookings/{{$flight->hash}}">Bookable</a></td>
+          <td class="not-booked"><a href="/booking/{{$flight->hash}}">Bookable</a></td>
           @endif</tr>
           @endforeach
         </table>
