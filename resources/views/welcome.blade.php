@@ -203,7 +203,8 @@
       $('#slideshow').backstretch([
         "/bradley.jpg"
         , "/runway.jpg",
-        "/rwy4r.jpg"
+        "/rwy4r.jpg",
+        "/blue-angels.jpg"
       ], {duration: 2000, fade: 1000});
 			$('select').material_select();
 			$(".button-collapse").sideNav();
