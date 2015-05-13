@@ -11,6 +11,7 @@
   		<script src="/js/jquery.smint.js"></script>
   		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans' rel='stylesheet' type='text/css'>
   		<link rel="stylesheet" href="/css/main.css">
+      <link rel="stylesheet" href="/css/fids.css">
 	</head>
 	<body>
 		<div class="navbar-fixed">
@@ -53,6 +54,12 @@
         <p><b>Q:</b>&nbsp;When can I make a booking?</p>
         <p><b>A</b>&nbsp;Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
         <h3>Bookings</h3>
+        <table class="fid-box">
+          <thead><th>Dept. Time</th><th>Arr. Time</th><th>Flight No.</th><th>Departs</th><th>Destination</th><th>Status</th></thead>
+          @foreach($flights as $flight)
+          <tr><td>{{$flight->departure}}</td><td>{{$flight->arrival}}</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td></tr>
+          @endforeach
+        </table>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">

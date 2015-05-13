@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Flight as Flight;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class FlightController extends Controller {
 	 */
 	public function index()
 	{
-		return view('bookings');
+		return view('bookings')->with('flights', Flight::all());
 	}
 
 	/**
