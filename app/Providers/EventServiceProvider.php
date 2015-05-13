@@ -2,6 +2,7 @@
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Flight as Flight;
 
 class EventServiceProvider extends ServiceProvider {
 
@@ -27,6 +28,10 @@ class EventServiceProvider extends ServiceProvider {
 		parent::boot($events);
 
 		//
+		Flight::created(function($flight){
+			$flight->hash = substr(str_shuffle(MD5(microtime())), 0, 60);
+			$flight->save();
+		});
 	}
 
 }

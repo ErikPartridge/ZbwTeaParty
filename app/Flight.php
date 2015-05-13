@@ -23,6 +23,7 @@ class Flight extends Model {
 
 	private $booked;
 
+	private $hash;
 
 	public function user(){
 		if($this->pilot_id != null){

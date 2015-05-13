@@ -52,12 +52,19 @@
         <p><b>Q:</b>&nbsp;Who can make a booking?</p>
         <p><b>A:</b>&nbsp;Any VATSIM pilot or controller who is not a home member of the Boston ARTCC.</p>
         <p><b>Q:</b>&nbsp;When can I make a booking?</p>
-        <p><b>A</b>&nbsp;Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
+        <p><b>A:</b>&nbsp;Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
+        <p><b>Q:</b>&nbsp;I don't like any of these flights, can I create my own booking?</p>
+        <p><b>A:</b>&nbsp;Yes, but not yet. While you don't need a booking to fly, if you'd still like to have the booking swag, pilots will be allowed to create a booking starting in mid-June.</p>
         <h3>Bookings</h3>
+        <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
         <table class="fid-box">
           <thead><th>Dept. Time</th><th>Arr. Time</th><th>Flight No.</th><th>Departs</th><th>Destination</th><th>Status</th></thead>
           @foreach($flights as $flight)
-          <tr><td>{{$flight->departure}}</td><td>{{$flight->arrival}}</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td></tr>
+          <tr><td>{{substr($flight->departure, 0, 5)}}z</td><td>{{substr($flight->arrival, 0, 5)}}z</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td>@if($flight->booked)
+          <td class="booked">Booked</td>
+          @else
+          <td class="not-booked"><a href="/bookings/{{$flight->hash}}">Bookable</a></td>
+          @endif</tr>
           @endforeach
         </table>
       </div>

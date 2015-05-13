@@ -16,6 +16,18 @@ th{
 }
 
 .fid-row {
+}
+
+td{
+	text-align: center;
 	font-family: "LCD Solid", monospace;
+}
+
+.booked{
+	color: red;
+}
+.not-booked a{
+	color: green;
+	text-decoration: underline;
 }
 
