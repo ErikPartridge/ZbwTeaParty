@@ -65,8 +65,8 @@
             <p>{{substr($flight->departure, 0, 5)}}z / {{(substr($flight->departure, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
           </div>
           <div class="col s12 m6 l6">
-            <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
-            <p>{{strtoupper($uuid)}}</p>
+            <p><b>Arrival Time</b></p>
+            <p>{{substr($flight->arrival, 0, 5)}}z / {{(substr($flight->arrival, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
             </div>
         </div>
       </div>
