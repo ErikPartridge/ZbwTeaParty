@@ -47,7 +47,11 @@ class FlightController extends Controller {
 	public function show( $hash)
 	{
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		return view('booking')->with('flight', $flight);
+		if($flight == null){
+			return redirect('/bookings');
+		}
+		$uuid = substr(base_convert($flight->hash, 16, 32), 0, 6).'-'.substr(base_convert($flight->hash, 16, 32), 0, 6){6};
+		return view('booking')->with('flight', $flight)->with('uuid', $uuid);
 	}
 
 	/**

@@ -47,7 +47,7 @@
           </div>
           <div class="col s12 m6 l6">
             <p><b>UUID</b>(put this in your remarks)</p>
-            <p>{{substr(base_convert($flight->hash, 16, 32), 0, 6)}}-{{substr(base_convert($flight->hash, 16, 32), 6, 7)}}</p>
+            <p>{{strtoupper($uuid)}}</p>
 
         </div>
       </div>
