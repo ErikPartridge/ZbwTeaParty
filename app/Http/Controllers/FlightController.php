@@ -41,12 +41,13 @@ class FlightController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  string  $hash
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(string $hash)
 	{
-		//
+		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
+		view('booking')->with('flight', $flight);
 	}
 
 	/**
