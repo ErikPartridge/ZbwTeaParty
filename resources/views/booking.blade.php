@@ -47,6 +47,7 @@
           <div class="col s12 m6 l6">
             <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
             <p>{{strtoupper($uuid)}}</p>
+            </div>
         </div>
         <div class="row">
           <div class="col s12 m6 l6">
@@ -56,6 +57,7 @@
           <div class="col s12 m6 l6">
             <p><b>Arrival Airport</b></p>
             <p>{{$flight->arrives}}</p>
+            </div>
         </div>
         <div class="row">
           <div class="col s12 m6 l6">
@@ -65,9 +67,8 @@
           <div class="col s12 m6 l6">
             <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
             <p>{{strtoupper($uuid)}}</p>
+            </div>
         </div>
-      </div>
-      </div>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">
