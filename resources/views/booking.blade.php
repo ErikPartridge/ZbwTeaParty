@@ -94,7 +94,7 @@
         @if(!$flight->booked)
         <div class="row">
           <div class="col s12 m12 l12">
-            <a href="#pilot-details" class="btn waves waves-collapse modal-trigger">Book</button>
+            <a href="#pilot-details" class="btn waves waves-collapse modal-trigger">Book</a>
         </div>
         @endif
       </div>
