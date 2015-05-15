@@ -69,6 +69,16 @@
             <p>{{substr($flight->arrival, 0, 5)}}z / {{(substr($flight->arrival, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
             </div>
         </div>
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <p><b>Aircraft Type</b></p>
+            <p>{{$flight->aircraft_type}} or similar</p>
+          </div>
+          <div class="col s12 m6 l6">
+            <p><b>Poker Qualifing</b></p>
+            <p>{{(bool) $flight->poker}} EDT</p>
+            </div>
+        </div>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">
