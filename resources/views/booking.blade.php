@@ -59,8 +59,8 @@
         </div>
         <div class="row">
           <div class="col s12 m6 l6">
-            <p><b>Departure Time (z / EDT)</b></p>
-            <p>{{substr($flight->departure, 0, 5)}} / {{(substr($flight->departure, 0, 2) - 4).substr($flight->departure, 2, 3)}}</p>
+            <p><b>Departure Time</b></p>
+            <p>{{substr($flight->departure, 0, 5)}}z / {{(substr($flight->departure, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
           </div>
           <div class="col s12 m6 l6">
             <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
