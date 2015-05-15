@@ -11,7 +11,6 @@
   		<script src="/js/jquery.smint.js"></script>
   		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans' rel='stylesheet' type='text/css'>
   		<link rel="stylesheet" href="/css/main.css">
-      <link rel="stylesheet" href="/css/fids.css">
 	</head>
 	<body>
 		<div class="navbar-fixed">
@@ -39,17 +38,17 @@
     		</div>
   		</nav>
   		</div>
-      <div class="container">
+      <div class="container booking-center">
         <div class="row">
           <div class="col s12 m6 l6">
             <p><b>Flight Number</b></p>
             <p>{{$flight->callsign}}</p>
           </div>
           <div class="col s12 m6 l6">
-            <p><b>UUID</b>(put this in your remarks)</p>
+            <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
             <p>{{strtoupper($uuid)}}</p>
-
         </div>
+      </div>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">
