@@ -47,7 +47,7 @@ class FlightController extends Controller {
 	public function show( $hash)
 	{
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		view('booking')->with('flight', $flight);
+		return view('booking')->with('flight', $flight);
 	}
 
 	/**
