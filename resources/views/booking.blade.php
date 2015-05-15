@@ -117,6 +117,7 @@
             <div class="input-field">
               <input value="{{$uuid}}"id="name" type="hidden" class="">
             </div>
+            <button class="btn submit">Submit</button>
           {!!Form::close()!!}
         </div>
       </div>
