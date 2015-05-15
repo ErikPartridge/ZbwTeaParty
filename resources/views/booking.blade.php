@@ -77,7 +77,7 @@
           <div class="col s12 m6 l6">
             <p><b>Poker Qualifing</b></p>
             <p>@if($flight->poker)
-              yes @endif no @endif
+              yes @else no @endif
             </p>
             </div>
         </div>
