@@ -77,7 +77,7 @@
           <div class="col s12 m6 l6">
             <p><b>Poker Qualifing</b></p>
             <p>@if($flight->poker)
-              yes @else no @endif
+              Yes @else No @endif
             </p>
             </div>
         </div>
@@ -90,6 +90,33 @@
             <p><b>Route</b></p>
             <p>{{$flight->route}}</p>
             </div>
+        </div>
+        @if(!$flight->booked)
+        <div class="row">
+          <div class="col s12 m12 l12">
+            <a href="#pilot-details" class="btn waves waves-collapse modal-trigger">Book</button>
+        </div>
+        @endif
+      </div>
+      <div id="pilot-details" class="modal">
+        <div class="model-content">
+          {!!Form::open(array('url' => '/booking/create', 'method' => 'post'))!!}
+            <div class="input-field">
+              <input name="name"id="name" type="text" class="validate">
+              <label for="name">First Name</label>
+            </div>
+            <div class="input-field">
+              <input name="cid"id="cid" type="text" class="validate">
+              <label for="cid">CID</label>
+            </div>
+            <div class="input-field">
+              <input name="email"id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+              <input value="{{$uuid}}"id="name" type="hidden" class="">
+            </div>
+          {!!Form::close()!!}
         </div>
       </div>
 	</body>
@@ -122,6 +149,7 @@
 
 			$('select').material_select();
 			$(".button-collapse").sideNav();
+      $('.modal-trigger').leanModal();
 			$('.menu').smint();
 		});
 	</script>
