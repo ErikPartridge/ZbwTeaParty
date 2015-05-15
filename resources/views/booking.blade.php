@@ -81,6 +81,16 @@
             </p>
             </div>
         </div>
+        <div class="row">
+          <div class="col s12 m4 l4">
+            <p><b>Cruise Altitude</b></p>
+            <p>{{$flight->altitude}}</p>
+          </div>
+          <div class="col s12 m8 l8">
+            <p><b>Route</b></p>
+            <p>{{$flight->route}}</p>
+            </div>
+        </div>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">
