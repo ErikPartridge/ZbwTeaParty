@@ -68,6 +68,7 @@
         </div>
       </div>
       </div>
+      </div>
 	</body>
 	<footer class="page-footer blue darken-1">
 	          <div class="container blue darken-1">
