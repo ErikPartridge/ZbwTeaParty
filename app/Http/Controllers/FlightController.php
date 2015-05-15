@@ -50,7 +50,7 @@ class FlightController extends Controller {
 		if($flight == null){
 			return redirect('/bookings');
 		}
-		$uuid = substr(base_convert($flight->hash, 16, 32), 0, 6).'-'.substr(base_convert($flight->hash, 16, 32), 0, 6){6};
+		$uuid = substr(base_convert($flight->hash, 16, 32), 0, 6).'-'.(base_convert($flight->hash, 16, 32){6});
 		return view('booking')->with('flight', $flight)->with('uuid', $uuid);
 	}
 
