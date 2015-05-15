@@ -76,7 +76,9 @@
           </div>
           <div class="col s12 m6 l6">
             <p><b>Poker Qualifing</b></p>
-            <p>{{(bool) $flight->poker}} EDT</p>
+            <p>@if($flight->poker)
+              yes @endif no @endif
+            </p>
             </div>
         </div>
       </div>
