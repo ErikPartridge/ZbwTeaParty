@@ -48,6 +48,24 @@
             <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
             <p>{{strtoupper($uuid)}}</p>
         </div>
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <p><b>Departure Airport</b></p>
+            <p>{{$flight->departs}}</p>
+          </div>
+          <div class="col s12 m6 l6">
+            <p><b>Arrival Airport</p>
+            <p>{{$flight->arrives}}</p>
+        </div>
+        <div class="row">
+          <div class="col s12 m6 l6">
+            <p><b>Departure Time (z / EDT)</b></p>
+            <p>{{substr($flight->departure, 0, 5)}} / {{substr($flight->departure, 0, 2) - 4}}:{{substr($flight->departure, 3, 5)}}</p>
+          </div>
+          <div class="col s12 m6 l6">
+            <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
+            <p>{{strtoupper($uuid)}}</p>
+        </div>
       </div>
       </div>
 	</body>
