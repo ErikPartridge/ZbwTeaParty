@@ -98,6 +98,7 @@
         </div>
         @endif
       </div>
+      </div>
       <div id="pilot-details" class="modal">
         <div class="model-content">
           {!!Form::open(array('url' => '/booking/create', 'method' => 'post'))!!}
@@ -119,6 +120,7 @@
           {!!Form::close()!!}
         </div>
       </div>
+
 	</body>
 	<footer class="page-footer blue darken-1">
 	          <div class="container blue darken-1">
