@@ -112,8 +112,8 @@
   			<div id="feedback">
   				<h3>Feedback</h3>
   				<p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the form below letting us know how we did.</p>
-
-  				<div id="feedback-form" class="feedback-form">
+          <p>The feedback form will open the day of the event</p>
+  				<!--<div id="feedback-form" class="feedback-form">
   					{!!Form::open()!!}
   					<div class="row">
   						<div class="input-field col m6 l6 s6">
@@ -169,7 +169,7 @@
   					</div>
   					{!!Form::close()!!}
   				</div>
-  			</div>
+  			</div> -->
   			<!-- END FEEDBACK FORM -->
   		</div>
 	</body>
