@@ -12,7 +12,7 @@
   		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans' rel='stylesheet' type='text/css'>
   		<link rel="stylesheet" href="/css/main.css">
       <link rel="stylesheet" href="/css/fids.css">
-      <script src="https://raw.githubusercontent.com/tristen/tablesort/gh-pages/tablesort.min.js"></script>
+      <script src="/js/tablesort.min.js"></script>
 	</head>
 	<body>
 		<div class="navbar-fixed">
