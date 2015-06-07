@@ -168,8 +168,8 @@
   						</div>
   					</div>
   					{!!Form::close()!!}
-  				</div>
-  			</div> -->
+  				</div>-->
+  			</div>
   			<!-- END FEEDBACK FORM -->
   		</div>
 	</body>
