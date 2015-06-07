@@ -11,6 +11,8 @@
   		<script src="/js/jquery.smint.js"></script>
   		<link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans' rel='stylesheet' type='text/css'>
   		<link rel="stylesheet" href="/css/main.css">
+      <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 	</head>
 	<body>
 		<div class="navbar-fixed">
@@ -82,11 +84,11 @@
             </div>
         </div>
         <div class="row">
-          <div class="col s12 m4 l4">
+          <div class="col s12 m6 l6">
             <p><b>Cruise Altitude</b></p>
             <p>{{$flight->altitude}}</p>
           </div>
-          <div class="col s12 m8 l8">
+          <div class="col s12 m6 l6">
             <p><b>Route</b></p>
             <p>{{$flight->route}}</p>
             </div>
@@ -147,6 +149,12 @@
 	            </div>
 	          </div>
 	        </footer>
+          @if(Session::has('success'))
+            <script>toastr.success('Your flight has been booked, you will receive an email soon.', 'Success', {timeOut: 50000});</script>
+          @endif
+          @if(Session::has('failed'))
+            <script>toastr.error('Something went wrong, either try again, or go back.', 'Failure!');</script>
+          @endif
           <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -155,7 +163,6 @@
 
   ga('create', 'UA-63783867-1', 'auto');
   ga('send', 'pageview');
-
 </script>
 	<script>
 		$(document).ready(function(){
