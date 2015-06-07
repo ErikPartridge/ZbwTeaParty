@@ -48,7 +48,7 @@
           </div>
           <div class="col s12 m6 l6">
             <p><b>UUID</b>&nbsp;(put this in your remarks)</p>
-            <p>{{strtoupper($uuid)}}</p>
+            <p>TP-{{$flight->id}}@if($flight->arrives == 'KBOS')-B@endif</p>
             </div>
         </div>
         <div class="row">
