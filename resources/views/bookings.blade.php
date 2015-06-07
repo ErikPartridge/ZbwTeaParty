@@ -59,7 +59,7 @@
         <h3>Bookings</h3>
         <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
         <table id="bookings-table" class="fid-box">
-          <thead><th><u>Dept. Time</u></th><th><u>Arr. Time</u></th><th><u>Flight No.</th><th>Departs</th><th>Destination</th><th>Status</th></thead>
+          <thead><th class="sort-default"><u>Dept. Time</u></th><th><u>Arr. Time</u></th><th><u>Flight No.</u></th><th><u>Departs</u></th><th><u>Destination</u></th><th><u>Status</u></th></thead>
           @foreach($flights as $flight)
           <tr><td>{{substr($flight->departure, 0, 5)}}z</td><td>{{substr($flight->arrival, 0, 5)}}z</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td>@if($flight->booked)
           <td class="booked">Booked</td>
