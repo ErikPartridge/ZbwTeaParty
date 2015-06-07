@@ -98,7 +98,7 @@
   				<p><b>Q:</b>&nbsp;What airports will be staffed?</p>
   				<p><b>A:</b>&nbsp;All of ZBW's airports. Approach/Departure will be online and providing top down service at a number of airports, both Bradley (KBDL) and Boston (KBOS) will be fully staffed, and center will provide top down service for all towered airports in ZBW airspace.</p>
   				<p><b>Q:</b>&nbsp;I'm a part of a virtual airline-- should I still make a booking?</p>
-  				<p><b>A:</b>&nbsp;If you want to. If you're part of a group flight (5 people or more), please drop our <a href="mailto:ec@bostonartcc.net">events coordinator an email</a> so he can best plan.</p>
+  				<p><b>A:</b>&nbsp;If you want to. If you're part of a group flight (5 people or more), please drop our <a href="mailto:events@bostonartcc.net">events coordinator an email</a> so he can best plan.</p>
   				<p><b>Q:</b>&nbsp;I don't have a working microphone, what should I do?</p>
   				<p><b>A:</b>&nbsp;Try to operate in at least voice receive mode, and file as such by putting /r/ in your remarks.</p>
           <p><b>Q:</b>&nbsp;What should I do when a controller says to descend via?</p>
