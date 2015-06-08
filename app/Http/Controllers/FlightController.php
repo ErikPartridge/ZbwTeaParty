@@ -24,7 +24,7 @@ class FlightController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create(Request $request)
 	{
 		$v = Validator::make($request->all(), [
         	'name' => 'required|max:255|alpha_dash|regex:^(.*\s+.*)+$',
