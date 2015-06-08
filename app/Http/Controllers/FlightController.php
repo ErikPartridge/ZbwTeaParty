@@ -42,7 +42,7 @@ class FlightController extends Controller {
     		$flight = Flight::findOrFail($request->id);
     		if($flight->booked){
     			Session::flash('failure', 'booked');
-    			return redirect('/bookings');
+    			return redirect('/booking');
     		}
     		$flight->booked = true;
     		if(Pilot::where('email', '=', $request->email)->count() == 1){
