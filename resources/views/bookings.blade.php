@@ -41,6 +41,19 @@
   		</nav>
   		</div>
       <div class="container">
+        <h3>Bookings</h3>
+        <h6>FAQ Below</h6>
+        <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
+        <table id="bookings-table" class="fid-box">
+          <thead><th class="sort-default"><u>Dept. Time</u></th><th><u>Arr. Time</u></th><th><u>Flight No.</u></th><th><u>Departs</u></th><th><u>Destination</u></th><th><u>Status</u></th></thead>
+          @foreach($flights as $flight)
+          <tr><td>{{substr($flight->departure, 0, 5)}}z</td><td>{{substr($flight->arrival, 0, 5)}}z</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td>@if($flight->booked)
+          <td class="booked">Booked</td>
+          @else
+          <td class="not-booked"><a href="/booking/{{$flight->hash}}">Bookable</a></td>
+          @endif</tr>
+          @endforeach
+        </table>
         <h3>Bookings FAQ</h3>
         <p><b>Q:</b>&nbsp;Do I have to have a booking?</p>
         <p><b>A:</b>&nbsp;No, only if you want to qualify for airport poker do you need to have a booking.</p>
@@ -58,18 +71,6 @@
         <p><b>A:</b>&nbsp;Yes, but not yet. While you don't need a booking to fly, if you'd still like to have the booking swag, pilots will be allowed to create a booking starting in mid-June.</p>
         <p><b>Q:</b>&nbsp;I didn't get an email, what do I do?!</p>
         <p><b>A:</b>&nbsp;The hyper-webs can be a complex place, wait an hour, if you still get nothing, email <a href="mailto:events@bostonartcc.net">our events coordinator</a> with your flight number.</p>
-        <h3>Bookings</h3>
-        <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
-        <table id="bookings-table" class="fid-box">
-          <thead><th class="sort-default"><u>Dept. Time</u></th><th><u>Arr. Time</u></th><th><u>Flight No.</u></th><th><u>Departs</u></th><th><u>Destination</u></th><th><u>Status</u></th></thead>
-          @foreach($flights as $flight)
-          <tr><td>{{substr($flight->departure, 0, 5)}}z</td><td>{{substr($flight->arrival, 0, 5)}}z</td><td>{{$flight->callsign}}</td><td>{{$flight->departs}}</td><td>{{$flight->arrives}}</td>@if($flight->booked)
-          <td class="booked">Booked</td>
-          @else
-          <td class="not-booked"><a href="/booking/{{$flight->hash}}">Bookable</a></td>
-          @endif</tr>
-          @endforeach
-        </table>
       </div>
 	</body>
 	<footer class="page-footer blue darken-1">
