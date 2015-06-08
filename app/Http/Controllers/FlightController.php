@@ -57,7 +57,9 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::queue('emails.booking', ['email' => $request->email, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message) use($request)
+    		$email = $request->email;
+    		$name = $request->name;
+    		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
     		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
