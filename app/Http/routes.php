@@ -23,11 +23,11 @@ Route::get('/booking', 'FlightController@index');
 
 Route::post('/booking', 'FlightController@create');
 
-Route::post('/booking/register', 'FlightController@new');
+Route::post('/booking/register', 'FlightController@create');
 
 Route::get('/booking/{hash}', 'FlightController@show');
 
-Route::get('/booking/delete/{hash}', 'FlightController@delete');
+Route::get('/booking/delete/{hash}', 'FlightController@destroy');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -26,7 +26,7 @@ class Flight extends Model {
 	private $hash;
 
 	public function user(){
-		if($this->pilot_id != null){
+		if($this->pilot_id != null && $this->pilot_id != 0){
 			return $this->belongsTo('Pilot');
 		}else{
 			return null;

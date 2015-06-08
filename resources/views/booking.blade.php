@@ -68,7 +68,7 @@
           </div>
           <div class="col s12 m6 l6">
             <p><b>Arrival Time</b></p>
-            <p>{{substr($flight->arrival, 0, 5)}}z / {{(substr($flight->arrival, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
+            <p>{{substr($flight->arrival, 0, 5)}}z / {{(substr($flight->arrival, 0, 2) - 4).substr($flight->arrival, 2, 3)}} EDT</p>
             </div>
         </div>
         <div class="row">
@@ -103,10 +103,10 @@
       </div>
       <div id="pilot-details" class="modal">
         <div class="model-content">
-          {!!Form::open(array('url' => '/booking/create', 'method' => 'post'))!!}
+          {!!Form::open(array('url' => '/booking/register', 'method' => 'post'))!!}
             <div class="input-field">
               <input name="name"id="name" type="text" class="validate">
-              <label for="name">First Name</label>
+              <label for="name">First and Last Name</label>
             </div>
             <div class="input-field">
               <input name="cid"id="cid" type="text" class="validate">
@@ -117,7 +117,7 @@
               <label for="email">Email</label>
             </div>
             <div class="input-field">
-              <input value="{{$uuid}}"id="name" type="hidden" class="">
+              <input name="id" value="{{$flight->id}}"id="name" type="hidden" class="">
             </div>
             <button class="btn submit">Submit</button>
           {!!Form::close()!!}
