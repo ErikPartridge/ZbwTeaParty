@@ -7,6 +7,8 @@ use App\Pilot as Pilot;
 use Illuminate\Http\Request;
 use Validator;
 use Session;
+use Mail;
+
 
 class FlightController extends Controller {
 
@@ -55,7 +57,7 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::send('emails.booking', ['flight' => $flight, 'name' => $request->name], function($message)
+    		Mail::queue('emails.booking', ['flight' => $flight, 'name' => $request->name], function($message)
     		{
     		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
