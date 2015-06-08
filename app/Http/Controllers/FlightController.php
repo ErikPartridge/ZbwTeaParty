@@ -61,7 +61,7 @@ class FlightController extends Controller {
     		$name = $request->name;
     		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
-    		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
+    		    $message->to($email, $name)->subject('Your Tea Party Booking');
     		});
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}
