@@ -25,7 +25,7 @@ class CreateFlightsTable extends Migration {
 			$table->boolean('booked');
 			$table->boolean('poker');
 			$table->integer('pilot_id')->unsigned();
-			$table->foreign('pilot_id')->references('id')->on('users');
+			$table->foreign('pilot_id')->references('id')->on('pilots');
 			$table->timestamps();
 		});
 	}
