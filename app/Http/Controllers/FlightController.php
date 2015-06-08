@@ -35,6 +35,8 @@ class FlightController extends Controller {
     	]);
     	if($v->fails()){
     		Session::flash('failure', 'validator');
+    		echo $v->messages();
+    		die();
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}else{
     		$flight = Flight::findOrFail($request->id);
