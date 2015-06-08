@@ -55,7 +55,7 @@
 <p>Link to cancel flight: <b>WARNING THIS IS FINAL</b> <a href="http://teaparty.bostonartcc.net/booking/delete/{{$flight->hash}}">delete</a>
 <p>Again, thanks for flying with us.</p>
 
-<p>Sincerely</p>
+<p>Sincerely,</p>
 
 <p>Camden Bruno, Events Coordinator, Virtual Boston ARTCC</p>
 
