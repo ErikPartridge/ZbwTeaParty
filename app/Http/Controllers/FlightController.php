@@ -28,7 +28,7 @@ class FlightController extends Controller {
 	public function create(Request $request)
 	{
 		$v = Validator::make($request->all(), [
-        	'name' => 'required|max:255|alpha_dash|regex:/^(.*\s+.*)+$/',
+        	'name' => 'required|max:255|regex:/^(.*\s+.*)+$/',
         	'cid' => 'required|numeric|min:6|max:7',
         	'email' => 'required|email|max:255',
         	'id' => 'required|numeric'
