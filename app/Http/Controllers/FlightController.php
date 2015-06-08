@@ -57,7 +57,7 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::queue('emails.booking', ['flight' => $flight, 'name' => $request->name], function($message)
+    		Mail::queue('emails.booking', ['request' => $request, 'flight' => $flight, 'name' => $request->name], function($message)
     		{
     		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
@@ -121,7 +121,7 @@ class FlightController extends Controller {
 	public function destroy($hash)
 	{
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		$flight->pilot_id = 0;
+		$flight->pilot_id = 1;
 		$flight->booked = false;
 		$flight->save();
 	}
