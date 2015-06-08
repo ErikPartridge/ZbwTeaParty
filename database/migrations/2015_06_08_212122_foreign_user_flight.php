@@ -13,7 +13,7 @@ class AddFlightHash extends Migration {
 	public function up()
 	{
 		Schema::table('flights', function($table){
-			//$table->dropForeign('pilot_id');
+			$table->dropForeign('flights_pilot_id');
 		});
 	}
 
@@ -25,7 +25,7 @@ class AddFlightHash extends Migration {
 	public function down()
 	{
 		Schema::table('flights', function($table){
-			//$table->foreign('pilot_id')->references('id')->on('pilots');
+			$table->foreign('pilot_id')->references('id')->on('pilots');
 		});
 	}
 
