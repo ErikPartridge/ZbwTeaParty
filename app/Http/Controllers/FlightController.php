@@ -57,9 +57,9 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::queue('emails.booking', ['email' => $request->email, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message)
+    		Mail::queue('emails.booking', ['email' => $request->email, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message) use($request)
     		{
-    		    $message->to($email, $name)->subject('Your Tea Party Booking');
+    		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}
