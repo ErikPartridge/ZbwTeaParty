@@ -56,6 +56,8 @@
         <p><b>A:</b>&nbsp;Anytime between now and thirty minutes prior to the booking's departure time on the day of Tea Party (Aug. 8)</p>
         <p><b>Q:</b>&nbsp;I don't like any of these flights, can I create my own booking?</p>
         <p><b>A:</b>&nbsp;Yes, but not yet. While you don't need a booking to fly, if you'd still like to have the booking swag, pilots will be allowed to create a booking starting in mid-June.</p>
+        <p><b>Q:</b>&nbsp;I didn't get an email, what do I do?!</p>
+        <p><b>A:</b>&nbsp;The hyper-webs can be a complex place, wait an hour, if you still get nothing, email <a href="mailto:events@bostonartcc.net">our events coordinator</a> with your flight number.</p>
         <h3>Bookings</h3>
         <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
         <table id="bookings-table" class="fid-box">
