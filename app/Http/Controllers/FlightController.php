@@ -29,14 +29,12 @@ class FlightController extends Controller {
 	{
 		$v = Validator::make($request->all(), [
         	'name' => 'required|max:255|regex:/^(.*\s+.*)+$/',
-        	'cid' => 'required|numeric|min:6|max:7',
+        	'cid' => 'required|numeric',
         	'email' => 'required|email|max:255',
         	'id' => 'required|numeric'
     	]);
     	if($v->fails()){
     		Session::flash('failure', 'validator');
-    		echo $v->messages();
-    		die();
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}else{
     		$flight = Flight::findOrFail($request->id);
