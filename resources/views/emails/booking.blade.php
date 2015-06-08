@@ -1,5 +1,5 @@
 <html>
-<p>Dear {{name}},</p>
+<p>Dear {{$name}},</p>
 <br><br>
 <p>Thanks for booking a flight for the Boston Tea Party. On behalf of all the controllers at ZBW, we look forward to seeing you.</p>
 <p>Below are the details for your flight, as well as a link to cancel your booking at any time. You will also receive an email 8-12 hours before Tea Party with a final reminder as well as a link to prefile your flightplan.</p>
