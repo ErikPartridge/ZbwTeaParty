@@ -6,6 +6,7 @@ use App\Flight as Flight;
 use App\Pilot as Pilot;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Http\Session;
 
 class FlightController extends Controller {
 
