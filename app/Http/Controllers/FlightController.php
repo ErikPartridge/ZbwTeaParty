@@ -59,6 +59,7 @@ class FlightController extends Controller {
     		{
     		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
+    		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}
 	}
 
