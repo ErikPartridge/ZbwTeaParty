@@ -57,7 +57,7 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::queue('emails.booking', ['request' => $request, 'flight' => $flight, 'name' => $request->name], function($message)
+    		Mail::queue('emails.booking', ['request' => $request, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message)
     		{
     		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
     		});
@@ -116,14 +116,20 @@ class FlightController extends Controller {
 	 * Remove the specified resource from storage.
 	 *
 	 * @param  string $hash
+	 * @param  string $cid
 	 * @return Response
 	 */
-	public function destroy($hash)
+	public function destroy($hash, $cid)
 	{
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		$flight->pilot_id = 1;
-		$flight->booked = false;
-		$flight->save();
+		if(Pilot::get($flight->pilot_id)->cid == $cid){
+			$flight->pilot_id = 1;
+			$flight->booked = false;
+			$flight->save();
+			return redirect('/booking');
+		}else{
+			return redirect('/error');
+		}
 	}
 
 }

@@ -27,7 +27,7 @@ Route::post('/booking/register', 'FlightController@create');
 
 Route::get('/booking/{hash}', 'FlightController@show');
 
-Route::get('/booking/delete/{hash}', 'FlightController@destroy');
+Route::get('/booking/delete/{hash}/{cid}', 'FlightController@destroy');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

@@ -52,7 +52,7 @@
             <p><b>Route</b></p>
             <p>{{$flight->route}}</p>
 <br>
-<p>Link to cancel flight: <b>WARNING THIS IS FINAL</b> <a href="http://teaparty.bostonartcc.net/flights/{{$flight->hash}}/delete">delete</a>
+<p>Link to cancel flight: <b>WARNING THIS IS FINAL</b> <a href="http://teaparty.bostonartcc.net/booking/delete/{{$flight->hash}}/{{$cid}}">delete</a>
 <p>Again, thanks for flying with us.</p>
 
 <p>Sincerely</p>
