@@ -57,9 +57,9 @@ class FlightController extends Controller {
     			$flight->pilot_id = $pilot->id;
     		}
     		$flight->save();
-    		Mail::queue('emails.booking', ['request' => $request, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message)
+    		Mail::queue('emails.booking', ['email' => $request->email, 'flight' => $flight, 'name' => $request->name, 'cid' => $request->cid], function($message)
     		{
-    		    $message->to($request->email, $request->name)->subject('Your Tea Party Booking');
+    		    $message->to($email, $name)->subject('Your Tea Party Booking');
     		});
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
     	}
@@ -119,17 +119,14 @@ class FlightController extends Controller {
 	 * @param  string $cid
 	 * @return Response
 	 */
-	public function destroy($hash, $cid)
+	public function destroy($hash)
 	{
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		if(Pilot::get($flight->pilot_id)->cid == $cid){
 			$flight->pilot_id = 1;
 			$flight->booked = false;
 			$flight->save();
 			return redirect('/booking');
-		}else{
-			return redirect('/error');
-		}
+
 	}
 
 }
