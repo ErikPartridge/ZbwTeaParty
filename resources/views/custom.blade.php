@@ -160,6 +160,7 @@
             
           });
           }
+      }); 
       $('#arrives').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
