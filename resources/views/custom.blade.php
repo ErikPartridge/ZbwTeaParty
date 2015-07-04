@@ -136,13 +136,8 @@
   ga('create', 'UA-63783867-1', 'auto');
   ga('send', 'pageview');
 </script>
-	<script>
-		$(document).ready(function(){
-
-			$('select').material_select();
-			$(".button-collapse").sideNav();
-			$('.menu').smint();
-      $('#departs').on('input', function() {
+<script>
+$('#departs').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
           $("#route").val("Searching...");
@@ -181,7 +176,14 @@
             
           });
           }
-      }); 
+      });
+      </script>
+	<script>
+		$(document).ready(function(){
+
+			$('select').material_select();
+			$(".button-collapse").sideNav();
+			$('.menu').smint(); 
 		});
 	</script>
 </html>
