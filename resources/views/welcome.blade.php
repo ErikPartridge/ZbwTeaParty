@@ -114,23 +114,23 @@
         <div id="sponsors">
           <h3>Sponsors</h3>
           <p>Be sure to compete in <a href="/poker">airport poker</a> by <a href="/booking">booking, then flying flights during Tea Party</a>. Those with the best hands* will win prizes from our great sponsors.</p>
-          <div class="col s12 m12 l6">
+          <div class="col s12 m6 l6">
             <h6>One (1) License for any Product from Flysimware Simulation Studios</h6>
             <a href="http://www.flysimware.com/FLYSTORE_2015/en/"><img src="/flysimware.jpg"></a>
           </div>
-          <div class="col s12 m12 l6">
+          <div class="col s12 m6 l6">
             <h6>One (1) License for the Carenado H850XP</h6>
             <a href="http://www.carenado.com/CarSite/Portal/index.php"><img src="/logocarenado.png"></a>
           </div>
-          <div class="col s12 m12 l6">
+          <div class="col s12 m6 l6">
             <h6>Two (2) licenses of Active Sky products of their choice from HiFi</h6>
             <a href="http://www.hifitechinc.com/"><img src="/hifi.png"></a>
           </div>
-          <div class="col s12 m12 l6">
+          <div class="col s12 m6 l6">
             <h6>One (1) License for any Orbx product</h6>
             <a href="https://fullterrain.com/"><img src="/orbx.jpg"></a>
           </div>
-          <div class="col s12 m12 l6">
+          <div class="col s12 m6 l6">
             <h6>One (1) License for any product from ATC Simulator </h6>
             <a href="http://www.atcsimulator.com/"><img src="/atcsim2.png"></a>
           </div>
