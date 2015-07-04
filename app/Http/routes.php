@@ -31,6 +31,8 @@ Route::get('/booking/delete/{hash}', 'FlightController@destroy');
 
 Route::post('/booking/create/', 'FlightController@store');
 
+Route::get('/custom-booking', 'FlightController@custom');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

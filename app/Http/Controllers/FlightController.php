@@ -22,6 +22,10 @@ class FlightController extends Controller {
 		return view('bookings')->with('flights', Flight::all());
 	}
 
+	public function custom(){
+		return view('custom');
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *

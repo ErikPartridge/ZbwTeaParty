@@ -88,7 +88,6 @@
               <input name="poker" type="checkbox" class="filled-in" id="poker" checked="checked" />
               <label for="poker">I would like to participate in airport poker (<a href="/poker">more info</a>)</label>
           </div>
-
           </div>
         {!!Form::close()}
         </div>
