@@ -167,7 +167,7 @@
           var arrives = $('#arrives').val();
           if(departs.length === 4 && arrives.length === 4){
             $.ajax({
-              url:"https://www.kimonolabs.com/api/71j7qufk?apikey=s956SELD6UaUGAJjzeh6LAUuTPOSfzxD" + "&origin=" + departs + "&destination=" + arrives,
+              url:"https://www.kimonolabs.com/api/ondemend/71j7qufk?apikey=s956SELD6UaUGAJjzeh6LAUuTPOSfzxD" + "&origin=" + departs + "&destination=" + arrives,
               crossDomain: true,
               dataType: "jsonp",
               success: function (response) {
