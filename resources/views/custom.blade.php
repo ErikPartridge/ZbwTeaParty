@@ -96,7 +96,7 @@
           </div>
           </div>
           <div class="row">
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">File Booking</button>
           </div>
         {!!Form::close()!!}
         </div>
