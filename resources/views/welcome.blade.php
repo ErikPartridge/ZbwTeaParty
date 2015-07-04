@@ -131,7 +131,7 @@
           </div>
           <div class="col s12 m6 l6">
             <h6>One (1) License for any Orbx product</h6>
-            <a href="https://fullterrain.com/"><img height="50%" src="/orbx.jpg"></a>
+            <a href="https://fullterrain.com/"><img width="40%" src="/orbx.jpg"></a>
           </div>
           </div>
           <div class="col s12 m6 l6">
