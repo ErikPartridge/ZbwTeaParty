@@ -71,17 +71,17 @@
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="depttime" placeholder="1900" id="depttime" type="time" class="validate">
+              <input name="depttime" placeholder="1900" id="depttime" type="text" class="validate">
               <label for="depttime">Departure Time (ZULU/UTC)</label>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrtime" placeholder="2030" id="arrtime" type="time" class="validate">
+              <input name="arrtime" placeholder="2030" id="arrtime" type="text" class="validate">
               <label for="arrtime">Arrival Time (ZULU/UTC)</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="cruise" placeholder="FL310" id="cruise" type="time" class="validate">
+              <input name="cruise" placeholder="FL310" id="cruise" type="text" class="validate">
               <label for="cruise">Cruise Altitude</label>
           </div>
           <div class="input-field col s6 m6 l6">
@@ -89,7 +89,7 @@
               <label for="poker">I would like to participate in airport poker (<a href="/poker">more info</a>)</label>
           </div>
           </div>
-        {!!Form::close()}
+        {!!Form::close()!!}
         </div>
       </div>
 
