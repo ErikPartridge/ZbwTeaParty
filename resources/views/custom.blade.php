@@ -137,6 +137,26 @@
   ga('send', 'pageview');
 </script>
 <script>
+$('#departs').on('input', function() {
+          var departs = $('#departs').val();
+          var arrives = $('#arrives').val();
+          $("#route").val("Searching...");
+          if(departs.length === 4 && arrives.length === 4){
+            $.ajax({
+              url:"https://www.kimonolabs.com/api/ondemand/71j7qufk?&origin=" + departs + "&destination=" + arrives,
+              crossDomain: true,
+              dataType: "jsonp",
+              success: function (response) {
+                var pref = response['results']["collection1"][0]['preferred'];
+                $('#route').val(pref);
+              },
+              error: function (xhr, status) {
+                $('#route').val('DCT')
+              }
+            
+          });
+          }
+      }); 
       $('#arrives').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
