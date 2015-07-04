@@ -145,6 +145,7 @@
       $('#departs').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
+          $("#route").val("Searching...");
           if(departs.length === 4 && arrives.length === 4){
             $.ajax({
               url:"https://www.kimonolabs.com/api/71j7qufk?apikey=s956SELD6UaUGAJjzeh6LAUuTPOSfzxD" + "&origin=" + departs + "&destination=" + arrives,
@@ -164,6 +165,7 @@
       $('#arrives').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
+          $("#route").val("Searching...");
           if(departs.length === 4 && arrives.length === 4){
             $.ajax({
               url:"https://www.kimonolabs.com/api/ondemend/71j7qufk?apikey=s956SELD6UaUGAJjzeh6LAUuTPOSfzxD" + "&origin=" + departs + "&destination=" + arrives,
