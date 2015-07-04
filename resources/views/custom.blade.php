@@ -145,14 +145,13 @@
       $('#departs').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
-          console.log("DEPART ACTION FIRED");
           if(departs.length === 4 && arrives.length === 4){
             $.ajax({
               url:"https://www.kimonolabs.com/api/71j7qufk?apikey=s956SELD6UaUGAJjzeh6LAUuTPOSfzxD" + "&origin=" + departs + "&destination=" + arrives,
               crossDomain: true,
               dataType: "jsonp",
               success: function (response) {
-                var pref = response['results'][0]['preferred'];
+                var pref = response['results']["collection1"][0]['preferred'];
                 $('#route').val(pref);
               },
               error: function (xhr, status) {
@@ -171,7 +170,7 @@
               crossDomain: true,
               dataType: "jsonp",
               success: function (response) {
-                var pref = response['results'][0]['preferred'];
+                var pref = response['results']["collection1"][0]['preferred'];
                 $('#route').val(pref);
               },
               error: function (xhr, status) {
