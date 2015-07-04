@@ -128,7 +128,7 @@
           </div>
           <div class="col s12 m12 l6">
             <h6>One (1) License for any Orbx product</h6>
-            <a href="https://fullterrain.com/"><img src="/logocarenado.png"></a>
+            <a href="https://fullterrain.com/"><img src="/orbx.jpg"></a>
           </div>
           <div class="col s12 m12 l6">
             <h6>One (1) License for any product from ATC Simulator </h6>
