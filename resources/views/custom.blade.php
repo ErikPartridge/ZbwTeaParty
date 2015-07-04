@@ -157,8 +157,9 @@
               error: function (xhr, status) {
                 $('#route').val('DCT')
               }
-            }
+            
           });
+          }
       $('#arrives').on('input', function() {
           var departs = $('#departs').val();
           var arrives = $('#arrives').val();
@@ -174,8 +175,9 @@
               error: function (xhr, status) {
                 $('#route').val('DCT')
               }
-            }
+            
           });
+          }
       }); 
 		});
 	</script>
