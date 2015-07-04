@@ -43,89 +43,54 @@
   		</nav>
   		</div>
       <div class="container booking-center">
+        <h3>Create Your Booking</h3>
+        <hr>
+        <h6>Flight Details</h6>
+        <hr>
         <div class="row">
-          <div class="col s12 m6 l6">
-            <p><b>Flight Number</b></p>
-            <p>{{$flight->callsign}}</p>
+        {!!Form::open(array('url' => '/booking/create/', 'method' => 'post', 'class' => 'col s12 l12 m12'))!!}
+          <div class="row">
+          <div class="input-field col s6 m6 l6">
+            <input name="callsign" placeholder="JBU1089" id="callsign" type="text" class="validate">
+            <label for="callsign">Callsign</label>
           </div>
-          <div class="col s12 m6 l6">
-            <p><b>ID</b>&nbsp;(put this in your remarks)</p>
-            <p>TP-{{$flight->id}}</p>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m6 l6">
-            <p><b>Departure Airport</b></p>
-            <p>{{$flight->departs}}</p>
+          <div class="input-field col s6 m6 l6">
+            <input name="aircraft" placeholder="T/A320/L" id="aircraft" type="text" class="validate">
+            <label for="aircraft">Aircraft Type</label>
           </div>
-          <div class="col s12 m6 l6">
-            <p><b>Arrival Airport</b></p>
-            <p>{{$flight->arrives}}</p>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m6 l6">
-            <p><b>Departure Time</b></p>
-            <p>{{substr($flight->departure, 0, 5)}}z / {{(substr($flight->departure, 0, 2) - 4).substr($flight->departure, 2, 3)}} EDT</p>
           </div>
-          <div class="col s12 m6 l6">
-            <p><b>Arrival Time</b></p>
-            <p>{{substr($flight->arrival, 0, 5)}}z / {{(substr($flight->arrival, 0, 2) - 4).substr($flight->arrival, 2, 3)}} EDT</p>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m6 l6">
-            <p><b>Aircraft Type</b></p>
-            <p>{{$flight->aircraft_type}} or similar</p>
+          <div class="row">
+          <div class="input-field col s6 m6 l6">
+              <input name="departs" placeholder="KBWI" id="departs" type="text" class="validate">
+              <label for="departs">Departure Field</label>
           </div>
-          <div class="col s12 m6 l6">
-            <p><b>Poker Qualifing</b></p>
-            <p>@if($flight->poker)
-              Yes @else No @endif
-            </p>
-            </div>
-        </div>
-        <div class="row">
-          <div class="col s12 m6 l6">
-            <p><b>Cruise Altitude</b></p>
-            <p>{{$flight->altitude}}</p>
+          <div class="input-field col s6 m6 l6">
+              <input name="arrives" placeholder="KPVD" id="arrives" type="text" class="validate">
+              <label for="arrives">Arrival Field</label>
           </div>
-          <div class="col s12 m6 l6">
-            <p><b>Route</b></p>
-            <p>{{$flight->route}}</p>
-            </div>
-        </div>
-        @if(!$flight->booked)
-        <div class="row">
-          <div class="col s12 m12 l12">
-            <a href="#pilot-details" class="btn waves waves-collapse modal-trigger">Book</a>
-        </div>
-        @endif
-      </div>
-      </div>
-      <div class="make-booking">
-        <a href="/custom-booking"><h3>Make a Custom Booking</h3></a>
-      </div>
-      <div id="pilot-details" class="modal">
-        <div class="model-content">
-          {!!Form::open(array('url' => '/booking/register', 'method' => 'post'))!!}
-            <div class="input-field">
-              <input name="name"id="name" type="text" class="validate">
-              <label for="name">First and Last Name</label>
-            </div>
-            <div class="input-field">
-              <input name="cid"id="cid" type="text" class="validate">
-              <label for="cid">CID</label>
-            </div>
-            <div class="input-field">
-              <input name="email"id="email" type="email" class="validate">
-              <label for="email">Email</label>
-            </div>
-            <div class="input-field">
-              <input name="id" value="{{$flight->id}}"id="name" type="hidden" class="">
-            </div>
-            <button class="btn submit">Submit</button>
-          {!!Form::close()!!}
+          </div>
+          <div class="row">
+          <div class="input-field col s6 m6 l6">
+              <input name="depttime" placeholder="1900" id="depttime" type="time" class="validate">
+              <label for="depttime">Departure Time (ZULU/UTC)</label>
+          </div>
+          <div class="input-field col s6 m6 l6">
+              <input name="arrtime" placeholder="2030" id="arrtime" type="time" class="validate">
+              <label for="arrtime">Arrival Time (ZULU/UTC)</label>
+          </div>
+          </div>
+          <div class="row">
+          <div class="input-field col s6 m6 l6">
+              <input name="cruise" placeholder="FL310" id="cruise" type="time" class="validate">
+              <label for="cruise">Cruise Altitude</label>
+          </div>
+          <div class="input-field col s6 m6 l6">
+              <input name="poker" type="checkbox" class="filled-in" id="poker" checked="checked" />
+              <label for="poker">I would like to participate in airport poker (<a href="/poker">more info</a>)</label>
+          </div>
+
+          </div>
+        {!!Form::close()}
         </div>
       </div>
 
@@ -154,12 +119,6 @@
 	            </div>
 	          </div>
 	        </footer>
-          @if(Session::has('success'))
-            <script>toastr.success('Your flight has been booked, you will receive an email soon.', 'Success', {timeOut: 50000});</script>
-          @endif
-          @if(Session::has('failure'))
-            <script>toastr.error('Must have been problem', 'Failure!');</script>
-          @endif
           <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -174,7 +133,6 @@
 
 			$('select').material_select();
 			$(".button-collapse").sideNav();
-      $('.modal-trigger').leanModal();
 			$('.menu').smint();
 		});
 	</script>
