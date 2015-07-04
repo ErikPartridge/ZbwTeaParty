@@ -89,6 +89,15 @@
               <label for="poker">I would like to participate in airport poker (<a href="/poker">more info</a>)</label>
           </div>
           </div>
+          <div class="row">
+          <div class="input-field col s12 m12 l12">
+              <input name="route" type="text" id="route" class="validate"/>
+              <label for="route">Flightplan Route</label>
+          </div>
+          </div>
+          <div class="row">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">
+          </div>
         {!!Form::close()!!}
         </div>
       </div>
