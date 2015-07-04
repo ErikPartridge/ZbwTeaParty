@@ -51,37 +51,37 @@
         {!!Form::open(array('url' => '/booking/create/', 'method' => 'post', 'class' => 'col s12 l12 m12'))!!}
           <div class="row">
           <div class="input-field col s6 m6 l6">
-            <input name="callsign" placeholder="JBU1089" id="callsign" type="text" class="validate">
+            <input name="callsign" id="callsign" type="text" class="validate">
             <label for="callsign">Callsign</label>
           </div>
           <div class="input-field col s6 m6 l6">
-            <input name="aircraft" placeholder="T/A320/L" id="aircraft" type="text" class="validate">
+            <input name="aircraft" id="aircraft" type="text" class="validate">
             <label for="aircraft">Aircraft Type</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="departs" placeholder="KBWI" id="departs" type="text" class="validate">
+              <input name="departs"id="departs" type="text" class="validate">
               <label for="departs">Departure Field</label>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrives" placeholder="KPVD" id="arrives" type="text" class="validate">
+              <input name="arrives"id="arrives" type="text" class="validate">
               <label for="arrives">Arrival Field</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="depttime" placeholder="1900" id="depttime" type="text" class="validate">
+              <input name="depttime" id="depttime" type="number" class="validate">
               <label for="depttime">Departure Time (ZULU/UTC)</label>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrtime" placeholder="2030" id="arrtime" type="text" class="validate">
+              <input name="arrtime" id="arrtime" type="number" class="validate">
               <label for="arrtime">Arrival Time (ZULU/UTC)</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="cruise" placeholder="FL310" id="cruise" type="text" class="validate">
+              <input name="cruise" id="cruise" type="text" class="validate">
               <label for="cruise">Cruise Altitude</label>
           </div>
           <div class="input-field col s6 m6 l6">
