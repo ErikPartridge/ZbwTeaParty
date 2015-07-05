@@ -26,6 +26,31 @@ class FlightController extends Controller {
 		return view('custom');
 	}
 
+	public function approve($hash, $poker){
+		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
+		$pilot = Pilot::where('id', '=', $flight->pilot_id);
+		if(!$flight->booked){
+			return redirect('/');
+		}
+		if($poker){
+			$flight->poker = true;
+			$name = $pilot->first.' '.$pilot->last;
+			$email = $pilot->email;
+			$flight->save();
+			Mail::queue('emails.custom-poker-yes', ['flight' => $flight, 'name' => $name], function($message) use ($email, $name){
+				$message->to($email, $name)->subject('Tea Party Poker Confirmation');
+			});
+		}else{
+			$flight->poker = false;
+			$name = $pilot->first.' '.$pilot->last;
+			$email = $pilot->email;
+			$flight->save();
+			Mail::queue('emails.custom-poker-no', ['flight' => $flight, 'name' => $name], function($message) use ($email, $name){
+				$message->to($email, $name)->subject('Tea Party Poker Denied');
+			});
+		}
+	}
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
@@ -63,6 +88,7 @@ class FlightController extends Controller {
     		$flight->save();
     		$email = $request->email;
     		$name = $request->name;
+    		Session::flash('success');
     		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
     		    $message->to($email, $name)->subject('Your Tea Party Booking');
@@ -76,9 +102,60 @@ class FlightController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(Request $request)
 	{
-		//
+		$validator = Validator::make($request->all(),[
+			'first' => 'required|max:255',
+			'last'  => 'required|max:255',
+			'cid'   => 'required|numeric',
+			'email' => 'required|email|max:255',
+			//Now on to the pilot stuff
+			'callsign' => 'required||max:10',
+			'aircraft' => 'required|max:8',
+			'departs'  => 'required|alpha_num|min:3|max:4',
+			'arrives'  => 'required|alpha_num|min:3|max:4',
+			'cruise'   => 'required|alpha_num|max:7',
+			'deptttime' => 'required|min:4|max:4',
+			'arrtime'  => 'required|min:4|max:4'
+		]);
+		if($validator->fails()){
+			Session::flash('failure', 'validator');
+			return redirect('/custom-booking');
+		}else{
+			$pilot = new Pilot;
+			$pilot->first = $request->first;
+			$pilot->last = $request->last;
+			$pilot->cid  = $request->cid;
+			$pilot->email = $request->email;
+			$pilot->save();
+			$flight = new Flight;
+			$flight->callsign = $request->callsign;
+			$flight->departure = $request->depttime.'00';
+			$flight->arrival = $request->arrtime.'00';
+			$flight->departs = $request->departs;
+			$flight->arrives = $request->arrives;
+			$flight->altitude = $request->cruise;
+			$flight->aircraft_type = $request->aircraft;
+			$flight->route = $request->route;
+			$flight->pilot_id = $pilot->id;
+			$flight->poker = 0;
+			$flight->save();
+			$email = $request->email;
+    		$fullname = $request->first.' '.$request->last;
+    		$name = $request->first;
+    		Mail::send('emails.custom-booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $fullname)
+    		{
+    		    $message->to($email, $fullname)->subject('Your Tea Party Booking');
+    		});
+    		if($request->poker){
+    		Mail::send('emails.ec-custom', [ 'flight' => $flight, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
+    		{
+    		    $message->to('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
+    		});
+    		}
+    		Session::flash('success');
+    		return redirect('/booking/'.$flight->hash)
+		}
 	}
 
 	/**

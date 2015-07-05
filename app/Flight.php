@@ -25,6 +25,8 @@ class Flight extends Model {
 
 	private $hash;
 
+	private $poker;
+
 	public function user(){
 		if($this->pilot_id != null && $this->pilot_id != 0){
 			return $this->belongsTo('Pilot');

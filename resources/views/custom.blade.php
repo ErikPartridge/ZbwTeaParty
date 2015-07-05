@@ -13,6 +13,7 @@
   		<link rel="stylesheet" href="/css/main.css">
       <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+      <script src="/js/parsley.min.js"></script>
 	</head>
 	<body>
 		<div class="navbar-fixed">
@@ -48,40 +49,40 @@
         <h6>Flight Details</h6>
         <hr>
         <div class="row">
-        {!!Form::open(array('url' => '/booking/create/', 'method' => 'post', 'class' => 'col s12 l12 m12'))!!}
+        {!!Form::open(array('url' => '/booking/create/', 'method' => 'post', 'id' => 'form-details', 'class' => 'col s12 l12 m12'))!!}
           <div class="row">
           <div class="input-field col s6 m6 l6">
-            <input name="callsign" id="callsign" type="text" class="validate">
+            <input name="callsign" id="callsign" type="text" class="validate" minlength="3" maxlength="10" required>
             <label for="callsign">Callsign</label>
           </div>
           <div class="input-field col s6 m6 l6">
-            <input name="aircraft" id="aircraft" type="text" class="validate">
+            <input name="aircraft" id="aircraft" type="text" class="validate" minlength="3" maxlength="8" required>
             <label for="aircraft">Aircraft Type</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="departs"id="departs" type="text" class="validate">
+              <input name="departs"id="departs" type="text" class="validate" minlength="3" maxlength="4" required>
               <label for="departs">Departure Field</label>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrives"id="arrives" type="text" class="validate">
+              <input name="arrives"id="arrives" type="text" class="validate" minlength="3" maxlength="4" required>
               <label for="arrives">Arrival Field</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="depttime" id="depttime" type="number" class="validate">
-              <label for="depttime">Departure Time (ZULU/UTC)</label>
+              <label for"depttime">Departure Time (ZULU/UTC)</label>
+              <input name="depttime" id="depttime" type="text" minlength="4" maxlength="4" length="4" required>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrtime" id="arrtime" type="number" class="validate">
+              <input name="arrtime" id="arrtime" type="text" minlength="4" maxlength="4" length="4" required>
               <label for="arrtime">Arrival Time (ZULU/UTC)</label>
           </div>
           </div>
           <div class="row">
           <div class="input-field col s6 m6 l6">
-              <input name="cruise" id="cruise" type="text" class="validate">
+              <input name="cruise" id="cruise" type="text" class="validate" minlength="4" maxlength="7" required>
               <label for="cruise">Cruise Altitude</label>
           </div>
           <div class="input-field col s6 m6 l6">
@@ -91,12 +92,38 @@
           </div>
           <div class="row">
           <div class="input-field col s12 m12 l12">
-              <input name="route" type="text" id="route" class="validate"/>
+              <input name="route" type="text" id="route" class="validate" maxlength="255" required>
               <label for="route">Flightplan Route</label>
           </div>
           </div>
           <div class="row">
-            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">File Booking</button>
+            <br>
+            <hr>
+            <h6>Pilot Details</h6>
+            <hr>
+          </div>
+          <div class="row">
+          <div class="input-field col s6 m6 l6">
+              <input name="first" type="text" id="first" class="validate" required>
+              <label for="first">First Name</label>
+          </div>
+          <div class="input-field col s6 m6 l6">
+              <input name="last" type="text" id="last" class="validate" required>
+              <label for="last">Last (Family) Name</label>
+          </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6 m6 l6">
+              <input name="cid" type="number" id="cid" min="800000" max="1500000" class="validate" required>
+              <label for="cid">CID</label>
+            </div>
+            <div class="input-field col s6 m6 l6">
+              <input name="email" type="text" id="email" class="validate" required >
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">File</button>
           </div>
         {!!Form::close()!!}
         </div>
@@ -136,6 +163,12 @@
   ga('create', 'UA-63783867-1', 'auto');
   ga('send', 'pageview');
 </script>
+@if(Session::has('failure'))
+<script>
+toastr.error('Please try again in a few minutes', 'Failure!');
+</script>
+@endif
+
 <script>
 $('#departs').on('input', function() {
           var departs = $('#departs').val();
@@ -180,7 +213,7 @@ $('#departs').on('input', function() {
       </script>
 	<script>
 		$(document).ready(function(){
-
+      $('#form-details').parsley();
 			$('select').material_select();
 			$(".button-collapse").sideNav();
 			$('.menu').smint(); 
