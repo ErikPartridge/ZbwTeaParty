@@ -135,8 +135,10 @@ class FlightController extends Controller {
 			}
 			$flight = new Flight;
 			$flight->callsign = $request->callsign;
-			$flight->departure = $request->depttime.'00';
-			$flight->arrival = $request->arrtime.'00';
+			$departuretime = substr($request->depttime,0,2).':'.substr($request->depttime, 2,2).':00';
+			$arrivaltime = substr($request->arrtime,0,2).':'.substr($request->arrtime, 2,2).':00';
+			$flight->departure = $departuretime;
+			$flight->arrival = $arrivaltime;
 			$flight->departs = $request->departs;
 			$flight->arrives = $request->arrives;
 			$flight->altitude = $request->cruise;
@@ -144,6 +146,7 @@ class FlightController extends Controller {
 			$flight->route = $request->route;
 			$flight->pilot_id = $pilot->id;
 			$flight->poker = 0;
+			$flight->booked = true;
 			$flight->save();
 			$email = $request->email;
     		$fullname = $request->first.' '.$request->last;

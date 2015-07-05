@@ -103,9 +103,6 @@
         @endif
       </div>
       </div>
-      <div class="make-booking">
-        <a href="/custom-booking"><h3>Make a Custom Booking</h3></a>
-      </div>
       <div id="pilot-details" class="modal">
         <div class="model-content">
           {!!Form::open(array('url' => '/booking/register', 'method' => 'post'))!!}

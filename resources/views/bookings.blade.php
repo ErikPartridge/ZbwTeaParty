@@ -45,6 +45,7 @@
       <div class="container">
         <h3>Bookings</h3>
         <h6>FAQ Below</h6>
+        <p>Looking to have some fun? Either make a <b><a href="/custom-booking">custom booking</a></b> or choose from one of the pre-planned flights below. All pre-made flights are guaranteed to qualify for <a href="/poker">poker</a>.</p>
         <b>ALL TIMES ARE ZULU (EDT+4, PDT+7)</b>
         <table id="bookings-table" class="fid-box">
           <thead><th class="sort-default"><u>Dept. Time</u></th><th><u>Arr. Time</u></th><th><u>Flight No.</u></th><th><u>Departs</u></th><th><u>Destination</u></th><th><u>Status</u></th></thead>
