@@ -24,7 +24,7 @@
         			<li><a href="/#charts">Charts</a></li>
           		<li><a href="/poker">Poker</a></li>
         			<li><a href="/#faq">FAQ</a></li>
-              <li><a href="#sponsors">Sponsors</a></li>
+              <li><a href="/#sponsors">Sponsors</a></li>
         			<li><a href="/#feedback">Feedback</a></li>
 
       			</ul>
