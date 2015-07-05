@@ -3,7 +3,7 @@
 <br>
 <p>Thanks for booking a flight for the Boston Tea Party. On behalf of all the controllers at ZBW, we look forward to seeing you.</p>
 <p>As you created this flight yourself, we'll need to confirm that it is eligible for poker if you were in fact interested in participating in poker. If you marked your interest on the form, you should receive a follow up email in the next couple of days with that confirmation.</p>
-<p>Below are the details for your flight, as well as a link to cancel your booking at any time. You will also receive an email 8-12 hours before Tea Party with a final reminder as well as a link to prefile your flightplan.</p>
+<p>Below are the details for your flight. You will also receive an email 8-12 hours before Tea Party with a final reminder as well as a link to prefile your flightplan.</p>
 
 
             <p><b>Flight Number</b></p>
