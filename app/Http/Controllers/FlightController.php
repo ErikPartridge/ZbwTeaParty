@@ -154,7 +154,7 @@ class FlightController extends Controller {
     		});
     		}
     		Session::flash('success');
-    		return redirect('/booking/'.$flight->hash)
+    		return redirect('/booking/'.$flight->hash);
 		}
 	}
 
