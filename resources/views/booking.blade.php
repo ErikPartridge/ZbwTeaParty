@@ -158,7 +158,7 @@
             <script>toastr.success('Your flight has been booked, you will receive an email soon.', 'Success', {timeOut: 50000});</script>
           @endif
           @if(Session::has('failure'))
-            <script>toastr.error('Must have been problem', 'Failure!');</script>
+            <script>toastr.error('Whoops!', 'Failure!');</script>
           @endif
           <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

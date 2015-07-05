@@ -88,7 +88,7 @@ class FlightController extends Controller {
     		$flight->save();
     		$email = $request->email;
     		$name = $request->name;
-    		Session::flash('success');
+    		Session::flash('success', 'party in the usa');
     		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
     		    $message->to($email, $name)->subject('Your Tea Party Booking');
@@ -107,24 +107,24 @@ class FlightController extends Controller {
 		$validator = Validator::make($request->all(),[
 			'first' => 'required|max:255',
 			'last'  => 'required|max:255',
-			'cid'   => 'required|numeric',
+			'cid'   => 'required',
 			'email' => 'required|email|max:255',
 			//Now on to the pilot stuff
-			'callsign' => 'required||max:10',
+			'callsign' => 'required|max:10',
 			'aircraft' => 'required|max:8',
 			'departs'  => 'required|alpha_num|min:3|max:4',
 			'arrives'  => 'required|alpha_num|min:3|max:4',
 			'cruise'   => 'required|alpha_num|max:7',
-			'deptttime' => 'required|min:4|max:4',
-			'arrtime'  => 'required|min:4|max:4'
+			'deptttime' => 'required',
+			'arrtime'  => 'required'
 		]);
-		if($validator->fails()){
+		if(0){
 			Session::flash('failure', 'validator');
 			return redirect('/custom-booking');
 		}else{
 			$pilot = null;
 			if(Pilot::where('email', '=', $request->email)->count() == 1){
-    			$pilot = Pilot::where('email', '=', $request->email)->firstOrFail()->id;
+    			$pilot = Pilot::where('email', '=', $request->email)->firstOrFail();
     		}else{
 			$pilot = new Pilot;
 			$pilot->first = $request->first;
@@ -158,7 +158,7 @@ class FlightController extends Controller {
     		    $message->to('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
     		});
     		}
-    		Session::flash('success');
+    		Session::flash('success', 'party in the usa');
     		return redirect('/booking/'.$flight->hash);
 		}
 	}

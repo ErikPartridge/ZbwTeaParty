@@ -73,10 +73,10 @@
           <div class="row">
           <div class="input-field col s6 m6 l6">
               <label for"depttime">Departure Time (ZULU/UTC)</label>
-              <input name="depttime" id="depttime" type="text" minlength="4" maxlength="4" length="4" required>
+              <input name="depttime" id="depttime" type="text" length="4" required>
           </div>
           <div class="input-field col s6 m6 l6">
-              <input name="arrtime" id="arrtime" type="text" minlength="4" maxlength="4" length="4" required>
+              <input name="arrtime" id="arrtime" type="text" length="4" required>
               <label for="arrtime">Arrival Time (ZULU/UTC)</label>
           </div>
           </div>
