@@ -122,12 +122,17 @@ class FlightController extends Controller {
 			Session::flash('failure', 'validator');
 			return redirect('/custom-booking');
 		}else{
+			$pilot = null;
+			if(Pilot::where('email', '=', $request->email)->count() == 1){
+    			$pilot = Pilot::where('email', '=', $request->email)->firstOrFail()->id;
+    		}else{
 			$pilot = new Pilot;
 			$pilot->first = $request->first;
 			$pilot->last = $request->last;
 			$pilot->cid  = $request->cid;
 			$pilot->email = $request->email;
 			$pilot->save();
+			}
 			$flight = new Flight;
 			$flight->callsign = $request->callsign;
 			$flight->departure = $request->depttime.'00';
