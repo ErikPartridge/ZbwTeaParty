@@ -13,8 +13,13 @@ class Pilot extends Model {
 
 	private $email;
 
+	private $queued_cards;
+	
 	public function flight(){
 		return $this->hasMany('Flight');
 	}
 
+	public function cards(){
+		return $this->hasMany('Card');
+	}
 }

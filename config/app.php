@@ -145,7 +145,7 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-		'Frozennode\Administrator\AdministratorServiceProvider',
+		'Frozennode\Administrator\AdministratorServiceProvider'
 
 	],
 

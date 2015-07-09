@@ -8,9 +8,17 @@ use Illuminate\Http\Request;
 use Validator;
 use Session;
 use Mail;
-
+use Cache;
+use Vatsimphp\VatsimData;
 
 class FlightController extends Controller {
+
+	public function test(){
+		$vatsim = new VatsimData();
+		$vatsim->loadData();
+		$pilots = $vatsim->getPilots()->toArray();
+		return $pilots;
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -89,7 +97,7 @@ class FlightController extends Controller {
     		$email = $request->email;
     		$name = $request->name;
     		Session::flash('success', 'party in the usa');
-    		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
+    		Mail::queue('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
     		    $message->to($email, $name)->subject('Your Tea Party Booking');
     		});
@@ -151,12 +159,12 @@ class FlightController extends Controller {
 			$email = $request->email;
     		$fullname = $request->first.' '.$request->last;
     		$name = $request->first;
-    		Mail::send('emails.custom-booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $fullname)
+    		Mail::queue('emails.custom-booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $fullname)
     		{
     		    $message->to($email, $fullname)->subject('Your Tea Party Booking');
     		});
     		if($request->poker){
-    		Mail::send('emails.ec-custom', [ 'flight' => $flight, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
+    		Mail::queue('emails.ec-custom', [ 'flight' => $flight, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
     		{
     		    $message->to('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
     		});
@@ -172,8 +180,9 @@ class FlightController extends Controller {
 	 * @param  string  $hash
 	 * @return Response
 	 */
-	public function show( $hash)
+	public function show($hash)
 	{
+		
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
 		if($flight == null){
 			return redirect('/bookings');
