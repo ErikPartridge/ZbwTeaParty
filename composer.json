@@ -13,7 +13,8 @@
 		"skymeyer/vatsimphp": "1.0.*",
 		"league/geotools": ">=0.4.0",
 		"predis/predis": "1.0.*",
-		"nesbot/carbon": "^1.20"
+		"nesbot/carbon": "^1.20",
+		"pda/pheanstalk": "~3.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

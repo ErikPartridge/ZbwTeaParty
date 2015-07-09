@@ -40,4 +40,6 @@ Route::controllers([
 	'password' => 'Auth\PasswordController',
 ]);
 
-Route::get('/test/pilots', 'FlightController@test');
+//Route::get('/test/pilots', 'FlightController@test');
+
+Route::get('/poker/TP-{id}', 'PokerController@show');

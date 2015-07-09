@@ -2,6 +2,7 @@
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Log;
 
 class Kernel extends ConsoleKernel {
 
@@ -25,7 +26,7 @@ class Kernel extends ConsoleKernel {
 	protected function schedule(Schedule $schedule)
 	{
 		$schedule->command('vatsim:update')
-				 ->cron('*/2 * * * *');
+				 ->cron('*/7 * * * *');
 		$schedule->exec('find /var/www/storage/app/data/ -type f -mtime +3 -delete')->hourly();
 		$schedule->exec('php composer.phar update')->daily();
 		$schedule->command('prefile:send')->everyFiveMinutes();

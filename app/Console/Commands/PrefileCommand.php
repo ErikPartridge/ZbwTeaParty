@@ -49,14 +49,13 @@ class PrefileCommand extends Command
                 if($flight->booked){
                     $departure = Carbon::parse($flight->departure, 'UTC');
                     if($departure->lte($now)){
-                        Mail::raw($departure.' '.$flight->callsign, function ($message) {
-                            $message->to('erikdevelopments@gmail.com');
+                        $pilot = Pilot::where('id', '=', $flight->pilot_id)->firstOrFail();
+                        Mail::queue('emails.go-time', ['fid' => $flight->id, 'pid' => $pilot->id], function($message) use ($pilot){
+                            $message->to($pilot->email, $pilot->first.' '.$pilot->last)->subject('It\'s Go Time for Tea Party');
                         });
                     }
                 }
             }
-        }else{
-            return 'Not yet Tea Party.';
         }
     }
 }
