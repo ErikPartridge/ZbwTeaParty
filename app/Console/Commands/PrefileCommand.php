@@ -46,13 +46,15 @@ class PrefileCommand extends Command
         if($now->month === 8 && $now->day === 8 && $now->year === 2015){
             $flights = Flight::all();
             foreach($flights as $flight){
-                if($flight->booked){
+                if($flight->booked && !$flight->notified){
                     $departure = Carbon::parse($flight->departure, 'UTC');
                     if($departure->lte($now)){
                         $pilot = Pilot::where('id', '=', $flight->pilot_id)->firstOrFail();
                         Mail::queue('emails.go-time', ['fid' => $flight->id, 'pid' => $pilot->id], function($message) use ($pilot){
                             $message->to($pilot->email, $pilot->first.' '.$pilot->last)->subject('It\'s Go Time for Tea Party');
                         });
+                        $flight->notified = true;
+                        $flight->save();
                     }
                 }
             }

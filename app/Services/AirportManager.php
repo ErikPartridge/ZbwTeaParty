@@ -16,7 +16,7 @@ class AirportManager{
 			return Cache::get($icao);
 		}else{
 			$json = Storage::get('airports.json');
-			$obj = json_decode($json);
+			$obj = json_decode($json, true);
 			$airport= $obj[$icao];
 			$latlng = $airport['lat'].', '.$airport['lon'];
 			Cache::put($icao, $latlng, 420);

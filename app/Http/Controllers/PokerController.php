@@ -8,9 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Flight;
 use App\Pilot;
+use App\Services\AirportManager;
 
 class PokerController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *

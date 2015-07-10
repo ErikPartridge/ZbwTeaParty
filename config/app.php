@@ -145,7 +145,8 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
-		'Frozennode\Administrator\AdministratorServiceProvider'
+		'Frozennode\Administrator\AdministratorServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 
 	],
 
@@ -195,7 +196,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'=> 'Illuminate\Html\FormFacade',
-	    'HTML'=> 'Illuminate\Html\HtmlFacade'
+	    'HTML'=> 'Illuminate\Html\HtmlFacade',
+	    'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
 	],
 

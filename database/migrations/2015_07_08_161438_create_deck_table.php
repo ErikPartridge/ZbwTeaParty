@@ -12,7 +12,7 @@ class CreateDeckTable extends Migration
      */
     public function up()
     {
-        Schema::create('deck', function(Blueprint $table){
+        Schema::create('decks', function(Blueprint $table){
             $table->increments('id');
         });
     }

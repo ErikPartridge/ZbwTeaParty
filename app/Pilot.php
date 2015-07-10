@@ -15,7 +15,7 @@ class Pilot extends Model {
 
 	private $queued_cards;
 	
-	public function flight(){
+	public function flights(){
 		return $this->hasMany('Flight');
 	}
 

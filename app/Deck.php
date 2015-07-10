@@ -64,8 +64,15 @@ class Deck extends Model
 
 
     public function fill_deck(){
+    	if($this->id === 1){
+    		return 0;
+    	}
     	foreach($card_names as $key => $value){
-
+    		$card = new Card;
+    		$card->deck_id = $this->id;
+    		$card->type = $key;
+    		$card->pilot_id = 1;
+    		$card->save();
     	}
     }
 
