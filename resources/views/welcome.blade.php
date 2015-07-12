@@ -117,11 +117,11 @@
           <div class= "row">
           <div class="col s12 m6 l6">
             <h6>One (1) License for any Product from Flysimware Simulation Studios</h6>
-            <a href="http://www.flysimware.com/FLYSTORE_2015/en/"><img src="/flysimware.jpg"></a>
+            <a href="http://www.flysimware.com/FLYSTORE_2015/en/"><img width="90%" src="/flysimware.jpg"></a>
           </div>
           <div class="col s12 m6 l6">
             <h6>One (1) License for the Carenado H850XP</h6>
-            <a href="http://www.carenado.com/CarSite/Portal/index.php"><img src="/logocarenado.png"></a>
+            <a href="http://www.carenado.com/CarSite/Portal/index.php"><img width="90%" src="/logocarenado.png"></a>
           </div>
           </div>
           <div class="row">
