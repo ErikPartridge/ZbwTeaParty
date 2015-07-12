@@ -80,4 +80,10 @@ class Deck extends Model
     	return $card_names[$id];
     }
 
+ 
+
+    public static function cardsAvailable(){
+    	return self::where('pilot_id', '!=', 1)->where('deck_id', '!=', 1)->count() > 0;
+    }
+
 }

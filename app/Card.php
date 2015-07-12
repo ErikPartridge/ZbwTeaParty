@@ -13,7 +13,7 @@ class Card extends Model
     private $type;
 
     public function deck(){
-    	return this->belongsTo('deck');
+    	return Deck::find($deck_id);
     }
 
 }

@@ -163,12 +163,10 @@ class FlightController extends Controller {
     		{
     		    $message->to($email, $fullname)->subject('Your Tea Party Booking');
     		});
-    		if($request->poker){
     		Mail::queue('emails.ec-custom', [ 'flight' => $flight, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
     		{
     		    $message->send('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
     		});
-    		}
     		Session::flash('success', 'party in the usa');
     		return redirect('/booking/'.$flight->hash);
 		}

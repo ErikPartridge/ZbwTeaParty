@@ -1,6 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \App\Pilot;
 
 class Flight extends Model {
 
@@ -33,12 +34,8 @@ class Flight extends Model {
 
 	private $landed;
 
-	public function user(){
-		if($this->pilot_id != null && $this->pilot_id != 0){
-			return $this->belongsTo('Pilot');
-		}else{
-			return null;
-		}
+	public function pilot(){
+		return Pilot::find($this->pilot_id);
 	}
 
 	public function active(){

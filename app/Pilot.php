@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Pilot extends Model {
+ class Pilot extends Model {
 
 	//
 	private $first;
@@ -14,12 +14,14 @@ class Pilot extends Model {
 	private $email;
 
 	private $queued_cards;
+
+	private $secure_key;
 	
 	public function flights(){
-		return $this->hasMany('Flight');
+		return Flight::where('pilot_id', '=', $this->id)->get();
 	}
 
 	public function cards(){
-		return $this->hasMany('Card');
+		return Card::where('pilot_id', '=', $this->id)->get();
 	}
 }

@@ -8,6 +8,7 @@ use App\Flight as Flight;
 use \Log;
 use Carbon\Carbon as Carbon;
 use Mail;
+use Hash;
 
 class PrefileCommand extends Command
 {
@@ -50,6 +51,10 @@ class PrefileCommand extends Command
                     $departure = Carbon::parse($flight->departure, 'UTC');
                     if($departure->lte($now)){
                         $pilot = Pilot::where('id', '=', $flight->pilot_id)->firstOrFail();
+                        if($pilot->secure_key == ''){
+                            $pilot->secure_key = substr(md5(microtime()),rand(0,26), 9);
+                            $pilot->save();
+                        }
                         Mail::queue('emails.go-time', ['fid' => $flight->id, 'pid' => $pilot->id], function($message) use ($pilot){
                             $message->to($pilot->email, $pilot->first.' '.$pilot->last)->subject('It\'s Go Time for Tea Party');
                         });

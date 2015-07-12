@@ -8,7 +8,7 @@
 <p>Without further ado, here's your <a href="https://cert.vatsim.net/fp/file.php?
 2={{$flight->callsign}}&amp;3={{$flight->aircraft_type}}&amp;4=300&amp;5={{$flight->departs}}&amp;6={{$flight->departure}}&amp;7={{$flight->altitude}}&amp;8={{str_replace(' ', '+', $flight->route)}}&amp;9={{$flight->arrives}}&amp;10a=0&amp;10b=0&amp;11=Boston+Tea+Party+2015+TP-{{$flight->id}}&amp;12a=0&amp;12b=0&amp;13=KBED&amp;14={{$pilot->first}}+{{$pilot->last}}">VATSIM Pre-File Link</a>which will be valid for two hours after you file it.</p>
 @if($flight->poker)
-<p>Here's also the <a href="http://teaparty.bostonartcc.net/hand/{{$pilot->cid}}/secure_key/manage">link to your poker hand</a>, where you can keep tabs on your hand and discard cards at any given time. Do not share this link.</p>
+<p>Here's also the <a href="http://teaparty.bostonartcc.net/hand/{{$pilot->cid}}/{{$pilot->secure_key}}/manage">link to your poker hand</a>, where you can keep tabs on your hand and discard cards at any given time. Do not share this link.</p>
 <p>You can check the status of this flight according to our servers at any time <a href="http://teaparty.bostonartcc.net/poker/TP-{{$flight->id}}/">here.</a>
 @endif
 <p>Charts for your <a href="http://flightaware.com/resources/airport/{{$flight->departs}}/procedures">departure airport</a> and <a href="http://flightaware.com/resources/airport/{{$flight->arrives}}/procedures">arrival airport</a> are available at the given links.</p>
