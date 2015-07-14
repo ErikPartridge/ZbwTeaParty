@@ -16,6 +16,14 @@ class Pokerer{
 	public static function fetchData(){
 		$vatsim = new VatsimData();
 		$vatsim->loadData();
+		$start = Carbon::create(2015, 8, 8, 12, 0, 0, 'UTC');
+		$end = Carbon::create(2015, 8, 8, 23, 59 ,0, 'UTC');
+		$now = Carbon::now('UTC');
+		if(!$now->gt($start) || !$now->lt($end)){
+		    $data = self::filterFlightData($vatsim->getClients()->toArray());
+		    self::checkForAirbornes($data);
+		    self::checkForLandings($data);
+		}
 		Storage::put('data/'.Carbon::now().' VATSIM.json.gz', gzencode(json_encode($vatsim->getClients()->toArray())));
 	} 
 
