@@ -1,16 +1,19 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use \App\Pilot;
 
 class Flight extends Model {
 
 	//
 	private $callsign;
 
+	//These are times
 	private $departure;
 
 	private $arrival;
 
+	//These are airports
 	private $arrives;
 
 	private $altitude;
@@ -27,11 +30,15 @@ class Flight extends Model {
 
 	private $poker;
 
-	public function user(){
-		if($this->pilot_id != null && $this->pilot_id != 0){
-			return $this->belongsTo('Pilot');
-		}else{
-			return null;
-		}
+	private $takenoff;
+
+	private $landed;
+
+	public function pilot(){
+		return Pilot::find($this->pilot_id);
+	}
+
+	public function active(){
+		return $this->takenoff && !$this->landed;
 	}
 }

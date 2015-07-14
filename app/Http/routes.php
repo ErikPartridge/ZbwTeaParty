@@ -39,3 +39,15 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+
+//Route::get('/test/pilots', 'FlightController@test');
+
+Route::get('/poker/TP-{id}', 'PokerController@show');
+
+Route::get('/hand/{cid}/{key}/manage', 'PokerController@index');
+
+Route::post('/hand/{cid}/{key}', 'PokerController@store');
+
+Route::get('/hand/{cid}/deal/181', 'PokerController@deal');
+
+Route::get('/hand/{cid}/remove/181', 'PokerController@delete');
