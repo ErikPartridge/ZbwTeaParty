@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url' => 'http://localhost',
+	'url' => 'http://teaparty.bostonartcc.net',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -146,7 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Frozennode\Administrator\AdministratorServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
+	
 
 	],
 
@@ -196,8 +196,7 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 		'Form'=> 'Illuminate\Html\FormFacade',
-	    'HTML'=> 'Illuminate\Html\HtmlFacade',
-	    'Debugbar' => 'Barryvdh\Debugbar\Facade',
+	    'HTML'=> 'Illuminate\Html\HtmlFacade'
 
 	],
 

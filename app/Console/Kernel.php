@@ -28,7 +28,6 @@ class Kernel extends ConsoleKernel {
 		$schedule->command('vatsim:update')
 				 ->cron('*/7 * * * *');
 		$schedule->exec('find /var/www/storage/app/data/ -type f -mtime +3 -delete')->hourly();
-		$schedule->exec('php composer.phar update')->daily();
 		$schedule->command('prefile:send')->everyFiveMinutes();
 	}
 

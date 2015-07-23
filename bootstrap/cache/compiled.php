@@ -129,6 +129,7 @@ interface Repository
 {
     public function has($key);
     public function get($key, $default = null);
+    public function all();
     public function set($key, $value = null);
     public function prepend($key, $value);
     public function push($key, $value);
@@ -344,19 +345,27 @@ interface Hasher
 
 namespace Illuminate\Auth {
 use Illuminate\Support\Manager;
+use Illuminate\Contracts\Auth\Guard as GuardContract;
 class AuthManager extends Manager
 {
     protected function createDriver($driver)
     {
         $guard = parent::createDriver($driver);
-        $guard->setCookieJar($this->app['cookie']);
-        $guard->setDispatcher($this->app['events']);
-        return $guard->setRequest($this->app->refresh('request', $guard, 'setRequest'));
+        if (method_exists($guard, 'setCookieJar')) {
+            $guard->setCookieJar($this->app['cookie']);
+        }
+        if (method_exists($guard, 'setDispatcher')) {
+            $guard->setDispatcher($this->app['events']);
+        }
+        if (method_exists($guard, 'setRequest')) {
+            $guard->setRequest($this->app->refresh('request', $guard, 'setRequest'));
+        }
+        return $guard;
     }
     protected function callCustomCreator($driver)
     {
         $custom = parent::callCustomCreator($driver);
-        if ($custom instanceof Guard) {
+        if ($custom instanceof GuardContract) {
             return $custom;
         }
         return new Guard($custom, $this->app['session.store']);
@@ -1306,7 +1315,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
 class Application extends Container implements ApplicationContract, HttpKernelInterface
 {
-    const VERSION = '5.1.6 (LTS)';
+    const VERSION = '5.1.8 (LTS)';
     protected $basePath;
     protected $hasBeenBootstrapped = false;
     protected $booted = false;
@@ -1596,6 +1605,10 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     {
         return $this['Illuminate\\Contracts\\Http\\Kernel']->handle(Request::createFromBase($request));
     }
+    public function shouldSkipMiddleware()
+    {
+        return $this->bound('middleware.disable') && $this->make('middleware.disable') === true;
+    }
     public function configurationIsCached()
     {
         return $this['files']->exists($this->getCachedConfigPath());
@@ -1803,10 +1816,12 @@ class ConfigureLogging
 }
 
 namespace Illuminate\Foundation\Bootstrap {
+use Exception;
 use ErrorException;
 use Illuminate\Contracts\Foundation\Application;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Debug\Exception\FatalErrorException;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 class HandleExceptions
 {
     protected $app;
@@ -1829,6 +1844,9 @@ class HandleExceptions
     }
     public function handleException($e)
     {
+        if (!$e instanceof Exception) {
+            $e = new FatalThrowableError($e);
+        }
         $this->getExceptionHandler()->report($e);
         if ($this->app->runningInConsole()) {
             $this->renderForConsole($e);
@@ -1971,12 +1989,14 @@ class DetectEnvironment
 
 namespace Illuminate\Foundation\Http {
 use Exception;
+use Throwable;
 use RuntimeException;
 use Illuminate\Routing\Router;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 class Kernel implements KernelContract
 {
     protected $app;
@@ -2000,6 +2020,10 @@ class Kernel implements KernelContract
         } catch (Exception $e) {
             $this->reportException($e);
             $response = $this->renderException($request, $e);
+        } catch (Throwable $e) {
+            $e = new FatalThrowableError($e);
+            $this->reportException($e);
+            $response = $this->renderException($request, $e);
         }
         $this->app['events']->fire('kernel.handled', array($request, $response));
         return $response;
@@ -2009,13 +2033,12 @@ class Kernel implements KernelContract
         $this->app->instance('request', $request);
         Facade::clearResolvedInstance('request');
         $this->bootstrap();
-        $shouldSkipMiddleware = $this->app->bound('middleware.disable') && $this->app->make('middleware.disable') === true;
-        return (new Pipeline($this->app))->send($request)->through($shouldSkipMiddleware ? array() : $this->middleware)->then($this->dispatchToRouter());
+        return (new Pipeline($this->app))->send($request)->through($this->app->shouldSkipMiddleware() ? array() : $this->middleware)->then($this->dispatchToRouter());
     }
     public function terminate($request, $response)
     {
-        $routeMiddlewares = $this->gatherRouteMiddlewares($request);
-        foreach (array_merge($routeMiddlewares, $this->middleware) as $middleware) {
+        $middlewares = $this->app->shouldSkipMiddleware() ? array() : array_merge($this->gatherRouteMiddlewares($request), $this->middleware);
+        foreach ($middlewares as $middleware) {
             list($name, $parameters) = $this->parseMiddleware($middleware);
             $instance = $this->app->make($name);
             if (method_exists($instance, 'terminate')) {
@@ -2092,6 +2115,7 @@ class Kernel implements KernelContract
 namespace Illuminate\Foundation\Auth {
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Cache;
 trait AuthenticatesUsers
 {
@@ -2135,7 +2159,7 @@ trait AuthenticatesUsers
     }
     protected function getFailedLoginMessage()
     {
-        return 'These credentials do not match our records.';
+        return Lang::has('auth.failed') ? Lang::get('auth.failed') : 'These credentials do not match our records.';
     }
     public function getLogout()
     {
@@ -2949,9 +2973,14 @@ class Request
     }
     public function __toString()
     {
+        try {
+            $content = $this->getContent();
+        } catch (\LogicException $e) {
+            return trigger_error($e, E_USER_ERROR);
+        }
         return sprintf('%s %s %s', $this->getMethod(), $this->getRequestUri(), $this->server->get('SERVER_PROTOCOL')) . '
 ' . $this->headers . '
-' . $this->getContent();
+' . $content;
     }
     public function overrideGlobals()
     {
@@ -4897,12 +4926,19 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exception\HttpResponseException;
 trait ValidatesRequests
 {
+    protected $validatesRequestErrorBag;
     public function validate(Request $request, array $rules, array $messages = array(), array $customAttributes = array())
     {
         $validator = $this->getValidationFactory()->make($request->all(), $rules, $messages, $customAttributes);
         if ($validator->fails()) {
             $this->throwValidationException($request, $validator);
         }
+    }
+    public function validateWithBag($errorBag, Request $request, array $rules, array $messages = array(), array $customAttributes = array())
+    {
+        $this->withErrorBag($errorBag, function () use($request, $rules, $messages, $customAttributes) {
+            $this->validate($request, $rules, $messages, $customAttributes);
+        });
     }
     protected function throwValidationException(Request $request, $validator)
     {
@@ -4927,9 +4963,15 @@ trait ValidatesRequests
     {
         return app('Illuminate\\Contracts\\Validation\\Factory');
     }
+    protected function withErrorBag($errorBag, callable $callback)
+    {
+        $this->validatesRequestErrorBag = $errorBag;
+        call_user_func($callback);
+        $this->validatesRequestErrorBag = null;
+    }
     protected function errorBag()
     {
-        return 'default';
+        return $this->validatesRequestErrorBag ?: 'default';
     }
 }
 }
@@ -5288,6 +5330,9 @@ class BcryptHasher implements HasherContract
     }
     public function check($value, $hashedValue, array $options = array())
     {
+        if (strlen($hashedValue) === 0) {
+            return false;
+        }
         return password_verify($value, $hashedValue);
     }
     public function needsRehash($hashedValue, array $options = array())
@@ -5844,6 +5889,11 @@ class Arr
         }
         return true;
     }
+    public static function isAssoc(array $array)
+    {
+        $keys = array_keys($array);
+        return array_keys($keys) !== $keys;
+    }
     public static function only($array, $keys)
     {
         return array_intersect_key($array, array_flip((array) $keys));
@@ -5898,13 +5948,15 @@ class Arr
     public static function sortRecursive($array)
     {
         foreach ($array as &$value) {
-            if (is_array($value) && isset($value[0])) {
-                sort($value);
-            } elseif (is_array($value)) {
-                self::sortRecursive($value);
+            if (is_array($value)) {
+                $value = self::sortRecursive($value);
             }
         }
-        ksort($array);
+        if (self::isAssoc($array)) {
+            ksort($array);
+        } else {
+            sort($array);
+        }
         return $array;
     }
     public static function where($array, callable $callback)
@@ -6083,6 +6135,7 @@ class Str
         }
         if (!ctype_lower($value)) {
             $value = strtolower(preg_replace('/(.)(?=[A-Z])/', '$1' . $delimiter, $value));
+            $value = preg_replace('/\\s+/', '', $value);
         }
         return static::$snakeCache[$key] = $value;
     }
@@ -6562,6 +6615,8 @@ class CookieServiceProvider extends ServiceProvider
 }
 
 namespace Illuminate\Database {
+use Faker\Factory as FakerFactory;
+use Faker\Generator as FakerGenerator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\QueueEntityResolver;
@@ -6576,6 +6631,7 @@ class DatabaseServiceProvider extends ServiceProvider
     }
     public function register()
     {
+        Model::clearBootedModels();
         $this->registerEloquentFactory();
         $this->registerQueueableEntityResolver();
         $this->app->singleton('db.factory', function ($app) {
@@ -6587,8 +6643,12 @@ class DatabaseServiceProvider extends ServiceProvider
     }
     protected function registerEloquentFactory()
     {
-        $this->app->singleton('Illuminate\\Database\\Eloquent\\Factory', function () {
-            return EloquentFactory::construct(database_path('factories'));
+        $this->app->singleton(FakerGenerator::class, function () {
+            return FakerFactory::create();
+        });
+        $this->app->singleton(EloquentFactory::class, function ($app) {
+            $faker = $app->make(FakerGenerator::class);
+            return EloquentFactory::construct($faker, database_path('factories'));
         });
     }
     protected function registerQueueableEntityResolver()
@@ -8990,9 +9050,9 @@ class Dispatcher implements DispatcherContract, QueueingDispatcher, HandlerResol
             throw new RuntimeException('Queue resolver did not return a Queue implementation.');
         }
         if (method_exists($command, 'queue')) {
-            $command->queue($queue, $command);
+            return $command->queue($queue, $command);
         } else {
-            $this->pushCommandToQueue($queue, $command);
+            return $this->pushCommandToQueue($queue, $command);
         }
     }
     protected function pushCommandToQueue($queue, $command)
@@ -9006,7 +9066,7 @@ class Dispatcher implements DispatcherContract, QueueingDispatcher, HandlerResol
         if (isset($command->delay)) {
             return $queue->later($command->delay, $command);
         }
-        $queue->push($command);
+        return $queue->push($command);
     }
     public function resolveHandler($command)
     {
@@ -9497,6 +9557,10 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
                 forward_static_call(array(get_called_class(), $method));
             }
         }
+    }
+    public static function clearBootedModels()
+    {
+        static::$booted = array();
     }
     public static function addGlobalScope(ScopeInterface $scope)
     {
@@ -12729,6 +12793,16 @@ class StreamHandler extends AbstractProcessingHandler
         if (is_resource($stream)) {
             $this->stream = $stream;
         } elseif (is_string($stream)) {
+            $dir = $this->getDirFromStream($stream);
+            if (null !== $dir && !is_dir($dir)) {
+                $this->errorMessage = null;
+                set_error_handler(array($this, 'customErrorHandler'));
+                $status = mkdir($dir, 511, true);
+                restore_error_handler();
+                if (false === $status) {
+                    throw new \UnexpectedValueException(sprintf('There is no existing directory at "%s" and its not buildable: ' . $this->errorMessage, $dir));
+                }
+            }
             $this->url = $stream;
         } else {
             throw new \InvalidArgumentException('A stream must either be a resource or a string.');
@@ -12771,7 +12845,18 @@ class StreamHandler extends AbstractProcessingHandler
     }
     private function customErrorHandler($code, $msg)
     {
-        $this->errorMessage = preg_replace('{^fopen\\(.*?\\): }', '', $msg);
+        $this->errorMessage = preg_replace('{^(fopen|mkdir)\\(.*?\\): }', '', $msg);
+    }
+    private function getDirFromStream($stream)
+    {
+        $pos = strpos($stream, '://');
+        if ($pos === false) {
+            return dirname($stream);
+        }
+        if ('file://' === substr($stream, 0, 7)) {
+            return dirname(substr($stream, 7));
+        }
+        return;
     }
 }
 }
@@ -12976,9 +13061,34 @@ class NormalizerFormatter implements FormatterInterface
             return @json_encode($data);
         }
         if (version_compare(PHP_VERSION, '5.4.0', '>=')) {
-            return json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $json = json_encode($data, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        } else {
+            $json = json_encode($data);
         }
-        return json_encode($data);
+        if ($json === false) {
+            $this->throwEncodeError(json_last_error(), $data);
+        }
+        return $json;
+    }
+    private function throwEncodeError($code, $data)
+    {
+        switch ($code) {
+            case JSON_ERROR_DEPTH:
+                $msg = 'Maximum stack depth exceeded';
+                break;
+            case JSON_ERROR_STATE_MISMATCH:
+                $msg = 'Underflow or the modes mismatch';
+                break;
+            case JSON_ERROR_CTRL_CHAR:
+                $msg = 'Unexpected control character found';
+                break;
+            case JSON_ERROR_UTF8:
+                $msg = 'Malformed UTF-8 characters, possibly incorrectly encoded';
+                break;
+            default:
+                $msg = 'Unknown error';
+        }
+        throw new \RuntimeException('JSON encoding failed: ' . $msg . '. Encoding: ' . var_export($data, true));
     }
 }
 }
@@ -13958,6 +14068,8 @@ interface EngineInterface
 
 namespace Illuminate\View\Engines {
 use Exception;
+use Throwable;
+use Symfony\Component\Debug\Exception\FatalThrowableError;
 class PhpEngine implements EngineInterface
 {
     public function get($path, array $data = array())
@@ -13973,6 +14085,8 @@ class PhpEngine implements EngineInterface
             include $__path;
         } catch (Exception $e) {
             $this->handleViewException($e, $obLevel);
+        } catch (Throwable $e) {
+            $this->handleViewException(new FatalThrowableError($e), $obLevel);
         }
         return ltrim(ob_get_clean());
     }
@@ -14192,10 +14306,10 @@ class BladeCompiler extends Compiler implements CompilerInterface
     }
     protected function compileEscapedEchos($value)
     {
-        $pattern = sprintf('/%s\\s*(.+?)\\s*%s(\\r?\\n)?/s', $this->escapedTags[0], $this->escapedTags[1]);
+        $pattern = sprintf('/(@)?%s\\s*(.+?)\\s*%s(\\r?\\n)?/s', $this->escapedTags[0], $this->escapedTags[1]);
         $callback = function ($matches) {
-            $whitespace = empty($matches[2]) ? '' : $matches[2] . $matches[2];
-            return '<?php echo e(' . $this->compileEchoDefaults($matches[1]) . '); ?>' . $whitespace;
+            $whitespace = empty($matches[3]) ? '' : $matches[3] . $matches[3];
+            return $matches[1] ? $matches[0] : '<?php echo e(' . $this->compileEchoDefaults($matches[2]) . '); ?>' . $whitespace;
         };
         return preg_replace_callback($pattern, $callback, $value);
     }
@@ -14250,11 +14364,11 @@ class BladeCompiler extends Compiler implements CompilerInterface
     }
     protected function compileLang($expression)
     {
-        return "<?php echo \\Illuminate\\Support\\Facades\\Lang::get{$expression}; ?>";
+        return "<?php echo app('translator')->get{$expression}; ?>";
     }
     protected function compileChoice($expression)
     {
-        return "<?php echo \\Illuminate\\Support\\Facades\\Lang::choice{$expression}; ?>";
+        return "<?php echo app('translator')->choice{$expression}; ?>";
     }
     protected function compileElse($expression)
     {
@@ -14881,7 +14995,8 @@ class Response
     {
         $status = ob_get_status(true);
         $level = count($status);
-        while ($level-- > $targetLevel && (!empty($status[$level]['del']) || isset($status[$level]['flags']) && $status[$level]['flags'] & PHP_OUTPUT_HANDLER_REMOVABLE && $status[$level]['flags'] & ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE))) {
+        $flags = PHP_VERSION_ID >= 50400 ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
+        while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
             if ($flush) {
                 ob_end_flush();
             } else {

@@ -193,13 +193,13 @@ class Pokerer{
 									self::dealCard($pilot);
 								}
 								self::dealCard($pilot);
-								for($pilot->cards() as $card){
+								foreach($pilot->cards() as $card){
 									$cardString = $card->type.' '.$cardString;
 								}
 
 								$cardString = trim($cardString);
 								$newCards = trim($newCards);
-								Mail::queue('landing-complete', ['first' => $pilot->first, 'callsign' => $f->callsign, 'cardString' => $cardString, 'queuedCards' = $pilot->queuedCards, 'cid' => $pilot->cid, 'secure_key' => $pilot->secure_key], function($message) use ($pilot){
+								Mail::queue('landing-complete', ['first' => $pilot->first, 'callsign' => $f->callsign, 'cardString' => $cardString, 'queuedCards' => $pilot->queuedCards, 'cid' => $pilot->cid, 'secure_key' => $pilot->secure_key], function($message) use ($pilot){
 									$message->subject('Cards Dealt')->to($pilot->email, $pilot->first.' '.$pilot->last);
 								});
 							}
