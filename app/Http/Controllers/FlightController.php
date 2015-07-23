@@ -97,8 +97,9 @@ class FlightController extends Controller {
     		$email = $request->email;
     		$name = $request->name;
     		Session::flash('success', 'party in the usa');
-    		Mail::send('emails.booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
+    		Mail::queue('emails.booking', [ 'flight_id' => $flight->id, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $name)
     		{
+    			\Log::error('Queueing');
     		    $message->to($email, $name)->subject('Your Tea Party Booking');
     		});
     		return redirect("/booking/".Flight::findOrFail($request->id)->hash);
@@ -159,15 +160,23 @@ class FlightController extends Controller {
 			$email = $request->email;
     		$fullname = $request->first.' '.$request->last;
     		$name = $request->first;
-    		Mail::send('emails.custom-booking', [ 'flight' => $flight, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $fullname)
+    		Mail::queue('emails.custom-booking', [ 'flight_id' => $flight->id, 'name' => $name, 'cid' => $request->cid], function($message) use($email, $fullname)
     		{
+    			\Log::error('Queueing Main');
     		    $message->to($email, $fullname)->subject('Your Tea Party Booking');
     		});
-    		
-    		Mail::send('emails.ec-custom', [ 'flight' => $flight, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
+
+    		Mail::queue('emails.ec-custom', [ 'flight_id' => $flight->id, 'name' => $fullname, 'email' => $email, 'cid' => $request->cid], function($message) use($email, $fullname)
     		{
-    		    $message->send('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
+    			\Log::error('Queueing Main');
+    		    $message->to('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking');
     		});
+    		
+    		/**Mail::queue('emails.ec-custom', [ 'flight_id' => $flight->id, 'email' => $email, 'name' => $fullname, 'cid' => $request->cid], function($message)
+    		{
+    			\Log::error('Queueing EC');
+    		    $message->send('events@bostonartcc.net', 'Camden Bruno')->subject('Tea Party Booking Awaiting Approval');
+    		});*/
     		
     		Session::flash('success', 'party in the usa');
     		return redirect('/booking/'.$flight->hash);

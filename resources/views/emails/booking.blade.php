@@ -1,3 +1,4 @@
+<?php namespace App; $flight = Flight::find($flight_id);?>
 <html>
 <p>Dear {{$name}},</p>
 <br><br>
