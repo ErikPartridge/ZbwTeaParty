@@ -36,7 +36,7 @@ class FlightController extends Controller {
 
 	public function approve($hash, $poker){
 		$flight = Flight::where('hash', '=', $hash)->firstOrFail();
-		$pilot = Pilot::where('id', '=', $flight->pilot_id);
+		$pilot = Pilot::where('id', '=', $flight->pilot_id)->firstOrFail();
 		if(!$flight->booked){
 			return redirect('/');
 		}
