@@ -3383,12 +3383,27 @@ class Request
     }
     public function getContent($asResource = false)
     {
-        if (PHP_VERSION_ID < 50600 && (false === $this->content || true === $asResource && null !== $this->content)) {
+        $currentContentIsResource = is_resource($this->content);
+        if (PHP_VERSION_ID < 50600 && false === $this->content) {
             throw new \LogicException('getContent() can only be called once when using the resource return type and PHP below 5.6.');
         }
         if (true === $asResource) {
+            if ($currentContentIsResource) {
+                rewind($this->content);
+                return $this->content;
+            }
+            if (is_string($this->content)) {
+                $resource = fopen('php://temp', 'r+');
+                fwrite($resource, $this->content);
+                rewind($resource);
+                return $resource;
+            }
             $this->content = false;
             return fopen('php://input', 'rb');
+        }
+        if ($currentContentIsResource) {
+            rewind($this->content);
+            return stream_get_contents($this->content);
         }
         if (null === $this->content) {
             $this->content = file_get_contents('php://input');
@@ -3580,7 +3595,8 @@ class Request
         if ($pos = strpos($requestUri, '?')) {
             $requestUri = substr($requestUri, 0, $pos);
         }
-        if (null !== $baseUrl && false === ($pathInfo = substr($requestUri, strlen($baseUrl)))) {
+        $pathInfo = substr($requestUri, strlen($baseUrl));
+        if (null !== $baseUrl && (false === $pathInfo || '' === $pathInfo)) {
             return '/';
         } elseif (null === $baseUrl) {
             return $requestUri;
@@ -14995,7 +15011,7 @@ class Response
     {
         $status = ob_get_status(true);
         $level = count($status);
-        $flags = PHP_VERSION_ID >= 50400 ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
+        $flags = defined('PHP_OUTPUT_HANDLER_REMOVABLE') ? PHP_OUTPUT_HANDLER_REMOVABLE | ($flush ? PHP_OUTPUT_HANDLER_FLUSHABLE : PHP_OUTPUT_HANDLER_CLEANABLE) : -1;
         while ($level-- > $targetLevel && ($s = $status[$level]) && (!isset($s['del']) ? !isset($s['flags']) || $flags === ($s['flags'] & $flags) : $s['del'])) {
             if ($flush) {
                 ob_end_flush();
