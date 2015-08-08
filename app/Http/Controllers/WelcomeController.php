@@ -32,8 +32,8 @@ class WelcomeController extends Controller {
 	}
 
 
-	public function feedback(){
-		/*$input = Request::all();
+	public function feedback(Request $request){
+		$input = $request->all();
 		/*$validator = Validator::make($input,
 			'email' => 'required|email',
             'your_name' => 'required',
