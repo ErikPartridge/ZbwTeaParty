@@ -52,9 +52,8 @@ class PokerController extends Controller
     }
 
     public function view($cid){
-        $pilot = Pilot::where('cid', '=', $cid)->firstOrFail(); 
-        
-        return redirect('/');
+        $pilot = Pilot::where('cid', '=', $cid)->first(); 
+        return 
         return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
     }
 
