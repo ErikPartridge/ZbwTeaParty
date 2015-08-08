@@ -42,9 +42,9 @@ class WelcomeController extends Controller {
 		//if(!validator->fails()){
 			//Storage::append('feedback.txt', implode('--', $input).'\n');
 
-			Mail::send('emails.feedback', $input, function($message){
+			/*Mail::send('emails.feedback', $input, function($message){
 				$message->to('atm@bostonartcc.net', 'Francesco Dube')->subject('Feedback, yay!');
-			});
+			});*/
 			return redirect('/');
 			/*
 		}else{
