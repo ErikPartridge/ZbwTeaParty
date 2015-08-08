@@ -44,7 +44,9 @@ Route::controllers([
 
 //Route::get('/test/pilots', 'FlightController@test');
 
-Route::get('/poker/TP-{id}', 'PokerController@show');
+Route::get('/poker/TP-{id}', function($id){
+	return "successful string";
+});
 
 Route::get('/hand/{cid}/{key}/manage', 'PokerController@index');
 
