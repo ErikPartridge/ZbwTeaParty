@@ -40,7 +40,6 @@ class WelcomeController extends Controller {
             'cid' => 'required|numeric'
 		);*/
 		//if(!validator->fails()){
-			return view('welcome');
 			Storage::append('feedback.txt', $input + '\n');
 			Mail::send('emails.feedback', $input, function($message){
 				$message->to('atm@bostonartcc.net', 'Francesco Dube')->subject('Feedback, yay!');
