@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class WelcomeController extends Controller {
 
 	/*
@@ -29,7 +31,7 @@ class WelcomeController extends Controller {
 	}
 
 	public function feedback(){
-		$input = $request->all();
+		$input = Request::all();
 		$validator = Validator::make($input,
 			'email' => 'required|email',
             'your_name' => 'required',
