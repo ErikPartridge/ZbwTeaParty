@@ -30,13 +30,14 @@ class WelcomeController extends Controller {
 		return view('poker');
 	}
 
+
 	public function feedback(){
 		$input = Request::all();
-		$validator = Validator::make($input,
+		/*$validator = Validator::make($input,
 			'email' => 'required|email',
             'your_name' => 'required',
             'cid' => 'required|numeric'
-		);
+		);*/
 		/*if(!validator->fails()){
 			Storage::append($input);
 			Mail::send('emails.feedback', $input, function($message){
