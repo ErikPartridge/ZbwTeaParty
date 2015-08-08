@@ -1,3 +1,4 @@
+<?php namespace App;?>
 <html>
 	<head>
 		<title>Tea Party 2015</title>
@@ -51,7 +52,6 @@
         <div class="row">
         	@foreach($cards as $card)
         		<div class="col s4 m2 l2">
-        		<?php use App\Deck;?>
         			<p>{{Deck::name($card->type)}}</p>
         			<img width="100%" height="200px" src="/public/cards/{{$card->type}}.svg" alt="{{$card->type}}">
         		</div>
