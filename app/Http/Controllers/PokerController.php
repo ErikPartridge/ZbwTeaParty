@@ -62,7 +62,7 @@ class PokerController extends Controller
     {
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
         $cards = array();
-        $pilotCards = Card::where('pilot_id', '=', $pilot->id)->get();
+        $pilotCards = Card::where('pilot_id', '=', $pilot->id)->where(->get();
         return view('hand')->with('cards', $cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
     }
 

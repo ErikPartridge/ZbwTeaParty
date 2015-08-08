@@ -28,4 +28,19 @@ class WelcomeController extends Controller {
 		return view('poker');
 	}
 
+	public function feedback(Request $request){
+		$input = $request->all();
+		/*$validator = Validator::make($input,
+			'email' => 'required|email',
+            'your_name' => 'required',
+            'cid' => 'required|numeric'
+		);*/
+		//if(!validator->fails()){
+		Storage::append('feedback.txt', implode('--', $input).'\n');
+		Mail::send('emails.feedback', $input, function($message){
+			$message->to('atm@bostonartcc.net', 'Francesco Dube')->subject('Feedback, yay!');
+		});
+		return redirect('/');
+	}
+
 }
