@@ -91,7 +91,7 @@ class PokerController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
         return "Succesful string";
         $flight = Flight::find($id);
