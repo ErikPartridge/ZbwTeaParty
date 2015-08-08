@@ -13,7 +13,7 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::post('/', 'WelcomeController@feedback');
+//Route::post('/', 'WelcomeController@feedback');
 
 Route::get('/poker', 'WelcomeController@poker');
 
