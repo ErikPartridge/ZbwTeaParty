@@ -58,7 +58,7 @@
         	@endforeach
         </div>
         <div class="row">
-        {!!Form::open(array('url' => '/hand/{{$pilot->cid}}/{{$pilot->secure_key}}', 'method' => 'post', 'id' => 'form-details', 'class' => 'col s12 l12 m12'))!!}
+        {!!\Form::open(array('url' => '/hand/{{$pilot->cid}}/{{$pilot->secure_key}}', 'method' => 'post', 'id' => 'form-details', 'class' => 'col s12 l12 m12'))!!}
           <div class="row">
           <div class="input-field col s12">
              <select id="card-discard" name="card-discard">
@@ -73,7 +73,7 @@
           <div class="row">
             <button class="btn waves-effect waves-light blue darken-1" type="submit" name="submit" style="width=100%">Submit Card to Discard</button>
           </div>
-        {!!Form::close()!!}
+        {!!\Form::close()!!}
         </div>
       </div>
 
