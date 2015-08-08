@@ -144,66 +144,94 @@
 
   			<!-- START FEEDBACK FORM-->
   			<div id="feedback">
-  				<h3>Feedback</h3>
-  				<p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the form below letting us know how we did.</p>
-          <p>The feedback form will open the day of the event</p>
-  				<!--<div id="feedback-form" class="feedback-form">
-  					{!!Form::open()!!}
-  					<div class="row">
-  						<div class="input-field col m6 l6 s6">
-          					<input id="your_name" type="text" class="validate" required>
-          					<label for="your_name">Your Name</label>
-        				</div>
-        				<div class="input-field col m6 l6 s6">
-          					<input id="cid" type="text" class="validate" required>
-          					<label for="cid">Your CID</label>
-        				</div>
-  					</div>
-  					<div class="row">
-  						<div class="input-field col m12 l12 s12">
-          					<input id="email" type="email" class="validate" required>
-          					<label for="email">Your Email</label>
-        				</div>
-  					</div>
-  					<div class="row">
-  						<div class="input-field col m6 l6 s6">
-          					<select name="controller" id="controller">
-          						<option value="Everyone">Everyone</option>
-          					</select>
-          					<label for="controller">The controller(s) who get feedback</label>
-        				</div>
-        				<div class="input-field col m6 l6 s6">
-        					<select name="rating" id="rating">
-        						<option value="Excellent">Excellent</option>
-        						<option value="Great">Great</option>
-        						<option value="Good">Good</option>
-        						<option value="Average">Average</option>
-        						<option value="Fair">Fair</option>
-        						<option value="Poor">Poor</option>
-        					</select>
-        					<label for="rating">Quality of the service</label>
-        				</div>
-  					</div>
-  					<div class="row">
-  					   	<label for="message">Comments</label>
-  						<textarea name="message" id="message" class="materialize-textarea"></textarea>
-  					</div>
-  					<div class="row">
-  						<div class="col m6 l6 s6">
-  						<p>
-  						    <input type="checkbox" id="response" name="response"/>
-  						    <label for="response">Would like a response</label>
-  						</p>
-  						</div>
-  						<div class="col m6 l6 s6">
-  							<button class="btn waves-effect waves-light blue darken-1" id="charts-search" type="submit" name="send" style="margin-left:20%;">Send
-    						<i class="mdi-content-send right"></i>
-  							</button>
-  						</div>
-  					</div>
-  					{!!Form::close()!!}
-  				</div>-->
-  			</div>
+          <h3>Feedback</h3>
+          <p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the following form letting us know how we did.</p>
+          <p>The feedback form is available <b><a href="http://bostonartcc.net/feedback/">here</a></b>, thank you.</p>
+            {!!Form::open(array('url' => 'feedback', 'method' => 'POST'))!!}
+            <div class="row">
+              <div class="input-field col m6 l6 s6">
+                    <input id="your_name" name="your_name" type="text" class="validate" required>
+                    <label for="your_name">Your Name</label>
+                </div>
+                <div class="input-field col m6 l6 s6">
+                    <input id="cid" name= "cid" type="text" class="validate" required>
+                    <label for="cid">Your CID</label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col m12 l12 s12">
+                    <input id="email" name="email" type="email" class="validate" required>
+                    <label for="email">Your Email</label>
+                </div>
+            </div>
+            <div class="row">
+              <div class="input-field col m6 l6 s6">
+                    <select name="controller" id="controller">
+                      <option value="Everyone">Everyone</option>
+                      <option value="All KBOS">All Boston (KBOS)</option>
+                      <option value="All KPVD">All Providence (KPVD)</option>
+                      <option value="All CTR">All BOS_CTR</option>
+                      <option value="BOS_LS_CTR">BOS_LS_CTR</option>
+                      <option value="BOS_LN_CTR">BOS_LN_CTR</option>
+                      <option value="BOS_H_CTR">BOS_H_CTR</option>
+                      <option value="BOS_S_APP">BOS_S_APP</option>
+                      <option value="BOS_N_APP">BOS_N_APP</option>
+                      <option value="BOS_F_APP">BOS_F_APP</option>
+                      <option value="BOS_TWR">BOS_TWR</option>
+                      <option value="BOS_GND">BOS_GND</option>
+                      <option value="BOS_DEL">BOS_DEL</option>
+                      <option value="PVD_APP">PVD_APP</option>
+                      <option value="PVD_TWR">PVD_TWR</option>
+                      <option value="PVD_GND">PVD_GND</option>
+                      <option value="CAPE_APP">CAPE_APP</option>
+                      <option value="ACK_TWR">ACK_TWR</option>
+                      <option value="BDL_APP">BDL_APP</option>
+                      <option value="BDL_TWR">BDL_TWR</option>
+                      <option value="BGR_APP">BGR_APP</option>
+                      <option value="BGR_TWR">BGR_TWR</option>
+                      <option value="PWM_APP">PWM_APP</option>
+                      <option value="PWM_TWR">PWM_TWR</option>
+                      <option value="BTV_APP">BTV_APP</option>
+                      <option value="SYR_APP">SYR_APP</option>
+                      <option value="ALB_APP">ALB_APP</option>
+                      <option value="MHT_APP">MHT_APP</option>
+                      <option value="ALB_TWR">ALB_TWR</option>
+                      <option value="MHT_APP">MHT_TWR</option>
+                    </select>
+                    <label for="controller">The controller(s) who get feedback</label>
+                </div>
+                <div class="input-field col m6 l6 s6">
+                  <select name="rating" id="rating">
+                    <option value="Excellent">Excellent</option>
+                    <option value="Great">Great</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                    <option value="Fair">Fair</option>
+                    <option value="Poor">Poor</option>
+                  </select>
+                  <label for="rating">Quality of the service</label>
+                </div>
+            </div>
+            <div class="row">
+                <label for="message">Comments</label>
+              <textarea name="message" id="message" class="materialize-textarea"></textarea>
+            </div>
+            <div class="row">
+              <div class="col m6 l6 s6">
+              <p>
+                  <input type="checkbox" id="response" name="response"/>
+                  <label for="response">Would like a response</label>
+              </p>
+              </div>
+              <div class="col m6 l6 s6">
+                <button class="btn waves-effect waves-light blue darken-1" id="charts-search" type="submit" name="send" style="margin-left:20%;">Send
+                <i class="mdi-content-send right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          {!!Form::close()!!}
+        </div>
   			<!-- END FEEDBACK FORM -->
   		</div>
 	</body>
