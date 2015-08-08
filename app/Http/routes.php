@@ -35,6 +35,8 @@ Route::get('/custom-booking', 'FlightController@custom');
 
 Route::get('/booking/approve/{hash}/181/{poker}', 'FlightController@approve');
 
+Route::post('/new-feedback', 'WelcomeController@feedback');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
