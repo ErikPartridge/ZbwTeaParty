@@ -29,6 +29,8 @@ class PokerController extends Controller
         if($pilot->secure_key != $key){
             return redirect('/');
         }else{
+            $cards = array();
+            $pilotCards = Card::where('pilot_id', '=', $pilot->id)->get();
             return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
         }
     }
@@ -59,7 +61,9 @@ class PokerController extends Controller
     public function create($cid)
     {
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
-        return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
+        $cards = array();
+        $pilotCards = Card::where('pilot_id', '=', $pilot->id)->get();
+        return view('hand')->with('cards', $cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
     }
 
     /**
