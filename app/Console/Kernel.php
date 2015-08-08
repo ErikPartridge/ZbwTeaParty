@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel {
 	protected function schedule(Schedule $schedule)
 	{
 		$schedule->command('vatsim:update')
-				 ->cron('*/7 * * * *');
-		$schedule->exec('find /var/www/storage/app/data/ -type f -mtime +3 -delete')->hourly();
+				 ->cron('*/2 * * * *');
+		//$schedule->exec('find /var/www/storage/app/data/ -type f -mtime + -delete')->hourly();
 		$schedule->command('prefile:send')->everyFiveMinutes();
 	}
 
