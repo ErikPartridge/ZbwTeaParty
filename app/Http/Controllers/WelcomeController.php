@@ -32,7 +32,7 @@ class WelcomeController extends Controller {
 	}
 
 
-	public function feedback(Request $request){
+	/*public function feedback(Request $request){
 		$input = $request->all();
 		/*$validator = Validator::make($input,
 			'email' => 'required|email',
@@ -42,14 +42,14 @@ class WelcomeController extends Controller {
 		//if(!validator->fails()){
 			//Storage::append('feedback.txt', implode('--', $input).'\n');
 
-			/*Mail::send('emails.feedback', $input, function($message){
+			Mail::send('emails.feedback', $input, function($message){
 				$message->to('atm@bostonartcc.net', 'Francesco Dube')->subject('Feedback, yay!');
-			});*/
+			});
 			return redirect('/');
 			/*
 		}else{
 			return redirect('/404');
 		}*/
-	}
+	}*/
 
 }

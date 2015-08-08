@@ -144,8 +144,9 @@
         <!-- START FEEDBACK FORM-->
         <div id="feedback">
           <h3>Feedback</h3>
-          <p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the form below letting us know how we did.</p>
-          <p>The feedback form will open the day of the event</p>
+          <p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the following form letting us know how we did.</p>
+          <p>The feedback form is available <b><a href="http://bostonartcc.net/feedback/">here</a></b>, thank you.</p>
+          <!---->
             {!!Form::open(array('url' => 'feedback', 'method' => 'POST'))!!}
             <div class="row">
               <div class="input-field col m6 l6 s6">
@@ -231,7 +232,7 @@
           </div>
           {!!Form::close()!!}
         </div>
-        <!-- END FEEDBACK FORM -->
+        END FEEDBACK FORM -->
   			<!-- END FEEDBACK FORM -->
   		</div>
 	</body>
