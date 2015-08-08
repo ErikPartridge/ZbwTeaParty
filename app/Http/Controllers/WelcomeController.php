@@ -42,7 +42,7 @@ class WelcomeController extends Controller {
 		//if(!validator->fails()){
 		Storage::append('feedback.txt', implode('--', $input).'\n');
 		$data = array(
-			'name' => $requst->input('your_name'),
+			'name' => $request->input('your_name'),
 			'cid' => $request->input('cid'),
 			'email' => $request->input('email'),
 			'position' => $request->input('controller'),
