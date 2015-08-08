@@ -13,8 +13,6 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::post('/', 'WelcomeController@feedback');
-
 Route::get('/poker', 'WelcomeController@poker');
 
 Route::get('/home', 'HomeController@index');
@@ -36,8 +34,6 @@ Route::get('/custom-booking', 'FlightController@custom');
 Route::get('/booking/approve/{hash}/181/{poker}', 'FlightController@approve');
 
 Route::get('/hand/{cid}/manage/override/181', 'PokerController@view');
-
-//Route::post('/feedback', 'WelcomeController@feedback');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
