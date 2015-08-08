@@ -53,7 +53,13 @@ class PokerController extends Controller
     }
 
     public function view($cid){
-        $pilot = Pilot::where('cid', '=', $cid)->firstOrFail(); 
+        $pilot = null;
+        $pilots = Pilot::all();
+        foreach($pilots as $p){
+            if($p->cid == $cid){
+                $pilot = $p;
+            }
+        }
         return redirect('/poker');
         return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
     }
@@ -75,7 +81,13 @@ class PokerController extends Controller
      */
     public function store($cid, $key)
     {   
-        $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
+        $pilot = null;
+        $pilots = Pilot::all();
+        foreach($pilots as $p){
+            if($p->cid == $cid){
+                $pilot = $p;
+            }
+        }
 
         if($pilot->secure_key != $key){
             return redirect('/');
