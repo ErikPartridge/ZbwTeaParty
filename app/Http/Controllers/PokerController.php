@@ -79,7 +79,7 @@ class PokerController extends Controller
             }
             if($pilot->queued_cards > 0){
                 $pilot->queued_cards = $pilot->queued_cards - 1;
-                Pokerer::dealCard($pilot->id)
+                Pokerer::dealCard($pilot->id);
             }
             return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
         }
