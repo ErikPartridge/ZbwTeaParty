@@ -56,7 +56,7 @@ class PokerController extends Controller
      *
      * @return Response
      */
-    public function create()
+    public function create($cid)
     {
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
         return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
