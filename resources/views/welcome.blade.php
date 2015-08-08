@@ -146,7 +146,7 @@
           <h3>Feedback</h3>
           <p>We strive to provide you with the best service possible here at ZBW, and truly your feedback is our paycheck. So, please, take the thirty seconds and fill out the form below letting us know how we did.</p>
           <p>The feedback form will open the day of the event</p>
-            {!!Form::open(array('url' => 'new-feedback'))!!}
+            {!!Form::open(array('url' => 'feedback', 'method' => 'POST'))!!}
             <div class="row">
               <div class="input-field col m6 l6 s6">
                     <input id="your_name" name="your_name" type="text" class="validate" required>
