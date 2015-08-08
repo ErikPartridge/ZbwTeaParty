@@ -41,7 +41,16 @@ class WelcomeController extends Controller {
 		);*/
 		//if(!validator->fails()){
 		Storage::append('feedback.txt', implode('--', $input).'\n');
-		Mail::send('emails.feedback', $input, function($message){
+		$data = array(
+			'name' => $requst->input('your_name');
+			'cid' => $request->input('cid');
+			'email' => $request->input('email');
+			'position' => $request->input('controller');
+			'rating' => $request->input('rating');
+			'comments' => $request->input('message');
+			'response' => $request->has('response');
+		)
+		Mail::send('emails.feedback', $data, function($message){
 			$message->to('atm@bostonartcc.net', 'Francesco Dube')->subject('Feedback, yay!');
 		});
 		return redirect('/');
