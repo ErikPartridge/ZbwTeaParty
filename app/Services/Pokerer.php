@@ -218,7 +218,7 @@ class Pokerer{
         	$result = array();
 			foreach($data as $flight){
 				if(Pilot::where('cid', '=', $flight['cid'])->count() === 1){
-					array_push($result, $f);
+					array_push($result, $flight);
 				}
 			}
 			return $result;
