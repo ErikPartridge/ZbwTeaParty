@@ -42,12 +42,12 @@ class WelcomeController extends Controller {
 		//if(!validator->fails()){
 		Storage::append('feedback.txt', implode('--', $input).'\n');
 		$data = array(
-			'name' => $requst->input('your_name');
-			'cid' => $request->input('cid');
-			'email' => $request->input('email');
-			'position' => $request->input('controller');
-			'rating' => $request->input('rating');
-			'comments' => $request->input('message');
+			'name' => $requst->input('your_name'),
+			'cid' => $request->input('cid'),
+			'email' => $request->input('email'),
+			'position' => $request->input('controller'),
+			'rating' => $request->input('rating'),
+			'comments' => $request->input('message'),
 			'response' => $request->has('response')
 		);
 		Mail::send('emails.feedback', $data, function($message){
