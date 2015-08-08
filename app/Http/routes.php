@@ -51,3 +51,5 @@ Route::post('/hand/{cid}/{key}', 'PokerController@store');
 Route::get('/hand/{cid}/deal/181', 'PokerController@deal');
 
 Route::get('/hand/{cid}/remove/181', 'PokerController@delete');
+
+Route::get('/hand/{cid}/manage/override/181', 'PokerController@create');
