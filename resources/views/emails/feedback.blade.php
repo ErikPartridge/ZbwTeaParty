@@ -1,15 +1,21 @@
 Dear DB,
 
 Name: {{$name}}
+<br>
 CID: {{$cid}}
+<br>
 Email: {{$email}}
+<br>
 
 For positon:
 
 Position: {{$position}}
+<br>
 Rating: {{$rating}}
+<br>
 Comments: {{$comments}}
-
-Response: (1 if yes, 0 if no) {{$response}}
-
+<br>
+<br>
+Response: (1 if yes, blank if no) {{$response}}
+<br>
 Thanks
