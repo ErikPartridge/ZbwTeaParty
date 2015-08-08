@@ -50,7 +50,7 @@ class PokerController extends Controller
         Pokerer::dealCard($pilot->id);
         return 'success';
     }
-    
+
     public function view($cid){
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail(); 
         return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
@@ -74,6 +74,7 @@ class PokerController extends Controller
     public function store($cid, $key)
     {   
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
+        return redirect('/');
         if($pilot->secure_key != $key){
             return redirect('/');
         }else{
