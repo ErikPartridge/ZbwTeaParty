@@ -146,7 +146,6 @@ return [
 		'App\Providers\RouteServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
 		'Frozennode\Administrator\AdministratorServiceProvider',
-		'Barryvdh\Debugbar\ServiceProvider',
 	
 
 	],
