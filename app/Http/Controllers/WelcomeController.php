@@ -44,7 +44,8 @@ class WelcomeController extends Controller {
 			Mail::send('emails.feedback', $input, function($message){
 				$message->to('atm@bostonartcc.net', 'Francesco Dubé')->subject('Feedback, yay!');
 			});
-			/*return redirect('/');
+			return redirect('/');
+			/*
 		}else{
 			return redirect('/404');
 		}*/
