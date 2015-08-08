@@ -229,7 +229,7 @@
               </div>
             </div>
           </div>
-          {{Form::close()}}
+          {!!Form::close()!!}
         </div>
         <!-- END FEEDBACK FORM -->
   			<!-- END FEEDBACK FORM -->
