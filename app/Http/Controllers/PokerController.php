@@ -42,7 +42,12 @@ class PokerController extends Controller
             return 'success';
         }else{
             $cards = Card::where('pilot_id', '=', $pilot->id)->get();
-            $cards->random()->delete();
+            if(count($cards) > 0){
+                $cards->random()->delete();
+            }else{
+                return "failed-- no cards";
+            }
+
             return 'card removed';
         }
         return 'failed';
@@ -75,6 +80,7 @@ class PokerController extends Controller
     public function store($cid, $key)
     {   
         $pilot = Pilot::where('cid', '=', $cid)->firstOrFail();
+        $cards = Card::where('pilot_id', '=', $pilot->id)->get();
         if($pilot->secure_key != $key){
             return redirect('/');
         }else{
@@ -87,7 +93,7 @@ class PokerController extends Controller
                 $pilot->queued_cards = $pilot->queued_cards - 1;
                 Pokerer::dealCard($pilot->id);
             }
-            return view('hand')->with('cards', $pilot->cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
+            return view('hand')->with('cards', cards)->with('queued_cards', $pilot->queued_cards)->with('pilot', $pilot);
         }
     }
 
