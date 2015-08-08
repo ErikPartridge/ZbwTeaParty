@@ -93,7 +93,6 @@ class PokerController extends Controller
      */
     public function show()
     {
-        $id = $route->input('id');
         return "Succesful string";
         $flight = Flight::find($id);
         if($flight->landed){
