@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\PokerController;
+
 Route::get('/', 'WelcomeController@index');
 
 Route::post('/', 'WelcomeController@feedback');
@@ -42,7 +44,9 @@ Route::controllers([
 
 //Route::get('/test/pilots', 'FlightController@test');
 
-Route::get('/poker/TP-{id}', 'PokerController@show');
+Route::get('/poker/TP-{id}', function($id){
+	return new PokerController()->show($id);
+});
 
 Route::get('/hand/{cid}/{key}/manage', 'PokerController@index');
 

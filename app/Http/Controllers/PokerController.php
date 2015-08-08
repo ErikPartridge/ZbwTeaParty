@@ -94,14 +94,13 @@ class PokerController extends Controller
     public function show($id)
     {
         $flight = Flight::find($id);
-            if($flight->landed){
-                return 'Landed and logged';
-            }else if($flight->takenoff){
-                return 'Airborne';
-            }else{
-                return 'Not yet airborne or online (there may be up to a four minute delay)';
-            }
-        
+        if($flight->landed){
+            return 'Landed and logged';
+        }else if($flight->takenoff){
+            return 'Airborne';
+        }else{
+            return 'Not yet airborne or online (there may be up to a four minute delay)';
+        }        
     }
 
     /**
